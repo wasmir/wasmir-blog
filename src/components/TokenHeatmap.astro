@@ -1,0 +1,94 @@
+---
+import usageData from '../data/usage.json';
+import {
+  buildGrid, dataLossBandWidth, monthLabels, computeMetrics, formatM, cellTitle,
+  type UsageData,
+} from '../lib/usage';
+
+const data = usageData as unknown as UsageData;
+const today = new Date().toISOString().slice(0, 10);
+
+// 数据起点：Claude Code 本地日志最早能追溯到的日子。更早的只有零星 Codex，
+// 统一当作「数据缺失」——只改这一个值，永远不要动 markup（见设计 handoff）。
+const DATA_START = '2026-04-16';
+
+const cells = buildGrid(data.byDay, today, DATA_START);
+const months = monthLabels(cells);
+const bandWidth = dataLossBandWidth(cells); // 0 = 不渲染蒙版
+
+// 汇总数字只统计真实记录区（>= 数据起点）。
+const liveByDay = Object.fromEntries(
+  Object.entries(data.byDay).filter(([date]) => date >= DATA_START),
+);
+const m = computeMetrics(liveByDay, today);
+
+const summary = [
+  { num: formatM(m.cumulative, 0), unit: 'M', label: '累计 token', peak: false },
+  { num: String(m.streak),         unit: '天', label: '最长连续 streak', peak: false },
+  { num: formatM(m.peak, 1),       unit: 'M', label: '单日峰值', peak: true },
+  { num: formatM(m.thisMonth, 0),  unit: 'M', label: '本月 token', peak: false },
+];
+const weekdays = ['', '一', '', '三', '', '五', ''];
+---
+<section class="module reveal" id="tokens">
+  <div class="module-head">
+    <span class="kicker">Token activity</span>
+  </div>
+  <div class="heat-card">
+    <div class="heat-summary">
+      {summary.map((s) => (
+        <div class={s.peak ? 'summary-item peak' : 'summary-item'}>
+          <div class="s-num">{s.num}<span class="unit">{s.unit}</span></div>
+          <div class="s-lbl">{s.label}</div>
+        </div>
+      ))}
+    </div>
+
+    <div class="heat-scroll">
+      <div class="heat-board">
+        <div class="heat-weekdays">
+          {weekdays.map((w) => <span>{w}</span>)}
+        </div>
+        <div class="heat-main">
+          <div class="heat-months">
+            {months.map((label) => <span>{label}</span>)}
+          </div>
+          <div class="heat-cells">
+            {cells.map((cell) => (
+              <div
+                class={cell.empty ? 'cell empty' : cell.lost ? 'cell lost' : `cell l${cell.level}`}
+                title={cellTitle(cell)}
+              ></div>
+            ))}
+            {bandWidth > 0 && (
+              <div class="heat-loss" style={`width:${bandWidth}px`} aria-hidden="true">
+                <span class="loss-tag">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                    <path d="M3 5v14c0 1.66 4 3 9 3"></path>
+                    <path d="M3 5c0 1.66 4 3 9 3s9-1.34 9-3-4-3-9-3-9 1.34-9 3"></path>
+                    <line x1="2" y1="2" x2="22" y2="22"></line>
+                  </svg>
+                  <span class="lt-main">Data loss</span>
+                  <span class="lt-sub">4.16 之前数据缺失</span>
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="heat-legend">
+      <span>少</span>
+      <div class="swatches">
+        <div class="cell l0"></div>
+        <div class="cell l1"></div>
+        <div class="cell l2"></div>
+        <div class="cell l3"></div>
+        <div class="cell l4"></div>
+      </div>
+      <span>多</span>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,38 @@
+---
+import { loadLearning } from '../lib/content';
+
+const { done, learning } = loadLearning();
+---
+<section class="module reveal" id="learning">
+  <div class="module-head">
+    <span class="kicker">Learning progress</span>
+  </div>
+  <div class="prog-board">
+    <div class="prog-col">
+      <div class="pc-head"><span class="lg-dot" style="background:var(--ink-800)"></span> 已完成</div>
+      {done.map((l) => (
+        <div class="prog-item done">
+          <span class="pi-name">
+            <span class="pi-topic">{l.topic}</span>
+            {l.via && <span class="pi-via">{l.via}</span>}
+          </span>
+          <span class="pi-track"><span class="pi-fill" style="width:100%"></span></span>
+          <span class="pi-pct">100</span>
+        </div>
+      ))}
+    </div>
+    <div class="prog-col">
+      <div class="pc-head"><span class="lg-dot" style="background:var(--pop);box-shadow:0 0 0 3px var(--pop-soft)"></span> 学习中</div>
+      {learning.map((l) => (
+        <div class="prog-item wip">
+          <span class="pi-name">
+            <span class="pi-topic">{l.topic}</span>
+            {l.via && <span class="pi-via">{l.via}</span>}
+          </span>
+          <span class="pi-track"><span class="pi-fill" style={`width:${l.progress}%`}></span></span>
+          <span class="pi-pct">{l.progress}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

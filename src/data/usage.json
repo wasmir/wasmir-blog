@@ -1,0 +1,616 @@
+{
+  "meta": {
+    "lastSync": "2026-05-29T04:55:32.116Z",
+    "metric": "io_no_cache",
+    "tools": [
+      "claude",
+      "codex"
+    ],
+    "machines": [
+      "mac-mini",
+      "macbook"
+    ]
+  },
+  "byDay": {
+    "2026-05-26": {
+      "macbook": {
+        "claude": 3253241,
+        "codex": 1639019
+      },
+      "mac-mini": {
+        "claude": 30762,
+        "codex": 53639
+      }
+    },
+    "2026-05-27": {
+      "macbook": {
+        "claude": 8749219,
+        "codex": 1196037
+      }
+    },
+    "2026-05-28": {
+      "macbook": {
+        "claude": 194058,
+        "codex": 2123011
+      }
+    },
+    "2026-05-29": {
+      "macbook": {
+        "claude": 1053512,
+        "codex": 357766
+      }
+    },
+    "2026-04-17": {
+      "macbook": {
+        "claude": 675223,
+        "codex": 0
+      }
+    },
+    "2026-05-24": {
+      "macbook": {
+        "claude": 11175496,
+        "codex": 0
+      }
+    },
+    "2026-05-12": {
+      "macbook": {
+        "claude": 1912999,
+        "codex": 0
+      },
+      "mac-mini": {
+        "claude": 99530,
+        "codex": 0
+      }
+    },
+    "2026-05-06": {
+      "macbook": {
+        "claude": 2117951,
+        "codex": 0
+      }
+    },
+    "2026-05-10": {
+      "macbook": {
+        "claude": 698145,
+        "codex": 0
+      },
+      "mac-mini": {
+        "claude": 1330020,
+        "codex": 0
+      }
+    },
+    "2026-04-18": {
+      "macbook": {
+        "claude": 72516,
+        "codex": 0
+      }
+    },
+    "2026-05-17": {
+      "macbook": {
+        "claude": 3958945,
+        "codex": 0
+      }
+    },
+    "2026-05-13": {
+      "macbook": {
+        "claude": 4186050,
+        "codex": 0
+      },
+      "mac-mini": {
+        "claude": 188460,
+        "codex": 0
+      }
+    },
+    "2026-05-23": {
+      "macbook": {
+        "claude": 6766136,
+        "codex": 0
+      }
+    },
+    "2026-05-14": {
+      "macbook": {
+        "claude": 142282,
+        "codex": 0
+      }
+    },
+    "2026-05-15": {
+      "macbook": {
+        "claude": 36456,
+        "codex": 0
+      }
+    },
+    "2026-05-07": {
+      "macbook": {
+        "claude": 2021808,
+        "codex": 0
+      },
+      "mac-mini": {
+        "claude": 1135641,
+        "codex": 0
+      }
+    },
+    "2026-04-26": {
+      "macbook": {
+        "claude": 2045788,
+        "codex": 0
+      }
+    },
+    "2026-04-27": {
+      "macbook": {
+        "claude": 1215151,
+        "codex": 0
+      }
+    },
+    "2026-04-28": {
+      "macbook": {
+        "claude": 10464,
+        "codex": 0
+      },
+      "mac-mini": {
+        "claude": 789864,
+        "codex": 0
+      }
+    },
+    "2026-05-18": {
+      "macbook": {
+        "claude": 7140216,
+        "codex": 0
+      }
+    },
+    "2026-05-19": {
+      "macbook": {
+        "claude": 8528795,
+        "codex": 0
+      }
+    },
+    "2026-05-08": {
+      "macbook": {
+        "claude": 236793,
+        "codex": 0
+      },
+      "mac-mini": {
+        "claude": 2216722,
+        "codex": 0
+      }
+    },
+    "2026-05-05": {
+      "macbook": {
+        "claude": 26837,
+        "codex": 0
+      },
+      "mac-mini": {
+        "claude": 14126,
+        "codex": 0
+      }
+    },
+    "2026-05-09": {
+      "macbook": {
+        "claude": 49555,
+        "codex": 0
+      },
+      "mac-mini": {
+        "claude": 909575,
+        "codex": 0
+      }
+    },
+    "2026-05-20": {
+      "macbook": {
+        "claude": 6235359,
+        "codex": 0
+      }
+    },
+    "2026-05-21": {
+      "macbook": {
+        "claude": 2928070,
+        "codex": 0
+      }
+    },
+    "2026-05-25": {
+      "macbook": {
+        "claude": 3563307,
+        "codex": 1521258
+      }
+    },
+    "2026-05-22": {
+      "macbook": {
+        "claude": 1619287,
+        "codex": 0
+      }
+    },
+    "2026-04-16": {
+      "macbook": {
+        "claude": 7114,
+        "codex": 0
+      }
+    },
+    "2025-11-29": {
+      "macbook": {
+        "claude": 0,
+        "codex": 589486
+      }
+    },
+    "2025-11-21": {
+      "macbook": {
+        "claude": 0,
+        "codex": 2918821
+      },
+      "mac-mini": {
+        "claude": 0,
+        "codex": 491285
+      }
+    },
+    "2025-10-04": {
+      "macbook": {
+        "claude": 0,
+        "codex": 982174
+      }
+    },
+    "2025-10-13": {
+      "macbook": {
+        "claude": 0,
+        "codex": 608566
+      },
+      "mac-mini": {
+        "claude": 0,
+        "codex": 383064
+      }
+    },
+    "2025-12-08": {
+      "macbook": {
+        "claude": 0,
+        "codex": 94125
+      }
+    },
+    "2025-12-01": {
+      "macbook": {
+        "claude": 0,
+        "codex": 912578
+      },
+      "mac-mini": {
+        "claude": 0,
+        "codex": 656458
+      }
+    },
+    "2026-03-18": {
+      "macbook": {
+        "claude": 0,
+        "codex": 1113
+      }
+    },
+    "2026-04-12": {
+      "macbook": {
+        "claude": 0,
+        "codex": 4372553
+      }
+    },
+    "2026-04-13": {
+      "macbook": {
+        "claude": 0,
+        "codex": 7127197
+      }
+    },
+    "2026-04-14": {
+      "macbook": {
+        "claude": 0,
+        "codex": 4035485
+      }
+    },
+    "2026-04-30": {
+      "mac-mini": {
+        "claude": 74216,
+        "codex": 0
+      }
+    },
+    "2026-04-29": {
+      "mac-mini": {
+        "claude": 105150,
+        "codex": 0
+      }
+    },
+    "2026-05-01": {
+      "mac-mini": {
+        "claude": 49940,
+        "codex": 0
+      }
+    },
+    "2026-05-02": {
+      "mac-mini": {
+        "claude": 159247,
+        "codex": 0
+      }
+    },
+    "2026-05-04": {
+      "mac-mini": {
+        "claude": 99667,
+        "codex": 0
+      }
+    },
+    "2026-05-11": {
+      "mac-mini": {
+        "claude": 614593,
+        "codex": 0
+      }
+    },
+    "2025-11-03": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 552396
+      }
+    },
+    "2025-11-04": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 4394488
+      }
+    },
+    "2025-11-05": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 4426946
+      }
+    },
+    "2025-11-02": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 449868
+      }
+    },
+    "2025-11-20": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 572712
+      }
+    },
+    "2025-11-17": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 119063
+      }
+    },
+    "2025-11-18": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 820078
+      }
+    },
+    "2025-11-27": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 29753
+      }
+    },
+    "2025-11-11": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 1378463
+      }
+    },
+    "2025-11-12": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 447328
+      }
+    },
+    "2025-11-10": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 1279042
+      }
+    },
+    "2025-11-19": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 4574197
+      }
+    },
+    "2025-11-26": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 1774671
+      }
+    },
+    "2025-11-25": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 6605379
+      }
+    },
+    "2025-11-22": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 2446572
+      }
+    },
+    "2025-11-30": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 1351314
+      }
+    },
+    "2025-11-24": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 3653601
+      }
+    },
+    "2025-11-23": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 29908
+      }
+    },
+    "2025-11-13": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 1951778
+      }
+    },
+    "2025-11-14": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 450628
+      }
+    },
+    "2025-10-20": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 628849
+      }
+    },
+    "2025-10-11": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 1850027
+      }
+    },
+    "2025-10-29": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 180990
+      }
+    },
+    "2025-10-30": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 156202
+      }
+    },
+    "2025-10-31": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 2510532
+      }
+    },
+    "2025-10-10": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 485031
+      }
+    },
+    "2025-10-18": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 1068705
+      }
+    },
+    "2025-10-21": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 414308
+      }
+    },
+    "2025-10-23": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 775431
+      }
+    },
+    "2025-10-15": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 198262
+      }
+    },
+    "2025-10-12": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 1624628
+      }
+    },
+    "2025-10-14": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 182502
+      }
+    },
+    "2025-10-22": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 1098983
+      }
+    },
+    "2025-09-18": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 184534
+      }
+    },
+    "2025-09-29": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 78386
+      }
+    },
+    "2025-09-27": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 217834
+      }
+    },
+    "2025-09-19": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 437958
+      }
+    },
+    "2025-09-26": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 27332
+      }
+    },
+    "2025-09-21": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 76686
+      }
+    },
+    "2025-09-30": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 147070
+      }
+    },
+    "2025-09-24": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 52577
+      }
+    },
+    "2025-09-23": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 75980
+      }
+    },
+    "2025-09-22": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 230934
+      }
+    },
+    "2025-09-25": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 48755
+      }
+    },
+    "2025-12-03": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 53221
+      }
+    },
+    "2025-12-04": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 844361
+      }
+    },
+    "2025-12-02": {
+      "mac-mini": {
+        "claude": 0,
+        "codex": 208663
+      }
+    }
+  }
+}

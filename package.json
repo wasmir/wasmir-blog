@@ -1,0 +1,24 @@
+{
+  "name": "wasmir-blog",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "collect": "node scripts/collect-usage.mjs",
+    "test": "vitest run",
+    "test:py": "python3 -m unittest discover -s scripts -p 'test_*.py'"
+  },
+  "dependencies": {
+    "astro": "^6.4.2",
+    "js-yaml": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "vitest": "^4.1.7"
+  }
+}

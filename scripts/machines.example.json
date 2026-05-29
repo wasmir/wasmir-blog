@@ -1,0 +1,6 @@
+{
+  "local": { "id": "macbook" },
+  "remotes": [
+    { "id": "mac-mini", "ssh": "user@<your-tailscale-ip>" }
+  ]
+}

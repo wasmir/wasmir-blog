@@ -1,0 +1,19 @@
+- name: Boofa
+  blurb: 一个 macOS 端的快速文本草稿工具，能在任意界面用快捷键呼出立即记录笔记。全屏看视频 / 一堆 Agent 在跑的同时想记点什么，可以快速打开快速记录。
+  status: finish
+  link: https://apps.apple.com/app/boofa/id6755095228
+  platform: macOS
+- name: Yeliner
+  blurb: 一个 iOS 端的原生大纲笔记工具。现在 iOS 上的大纲笔记多是套壳、看着有点古老，所以想自己搓一个玩玩。
+  status: finish
+  link: https://apps.apple.com/app/yeliner-outline-notes-tasks/id6770615183
+  platform: iOS
+- name: PPTAutoGen
+  blurb: 一套小学课件 PPT 的生成工作流，可以根据教材内容自动生成课程 PPT 以及配套的教学设计、网页等材料。用来卖钱的，最高达到了月入过万呢 🤣
+  status: finish
+  platform: 工作流
+- name: Picasso AI
+  blurb: 视频生成套壳站。原本想和认识的电商团队合作，但项目核心是低价资源，搞不来。
+  status: dropped
+  link: https://picasso-nine.vercel.app/
+  platform: Micro SaaS

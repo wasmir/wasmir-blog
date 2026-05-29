@@ -1,0 +1,231 @@
+/* ============================================================================
+   WASMIR DESIGN SYSTEM — Foundations
+   Direction: "Playful Neutral" — neutral charcoal/cream base + one lime pop.
+   Typefaces: Bricolage Grotesque (display) · Hanken Grotesk (text) · Space Mono (code)
+   ----------------------------------------------------------------------------
+   Fonts are loaded from Google Fonts (see README — these ARE the brand fonts,
+   not substitutes). To self-host, drop the files in /fonts and swap the @import.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12,400;12,500;12,600;12,700;12,800&family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  /* ---------------------------------------------------------------- COLORS */
+  /* Neutrals — warm-tinted gray scale (everything sits on this) */
+  --ink-900: #1A1916;   /* near-black — display headings */
+  --ink-800: #242220;   /* primary text ("char") */
+  --ink-600: #5C574E;   /* secondary text / body on cream */
+  --ink-500: #7D776C;   /* tertiary */
+  --ink-400: #ABA59A;   /* muted text, placeholders ("warm") */
+  --ink-300: #D8D3C8;   /* strong hairline / disabled */
+  --ink-200: #ECE8DF;   /* default border ("line") */
+  --ink-100: #F3F0E9;   /* subtle fill / hover bg */
+  --cream:   #FBFAF6;   /* page background ("cream") */
+  --white:   #FFFFFF;   /* card / elevated surface */
+
+  /* Accent — the one pop. Use sparingly: CTAs, highlights, focus. */
+  --pop:        #C6F24D; /* lime */
+  --pop-hover:  #B6E53A; /* pressed/hover lime */
+  --pop-soft:   #EEF9C9; /* tint fill */
+  --pop-ink:    #1F2A00; /* text/icons on lime */
+
+  /* Semantic — muted to live alongside the neutral base */
+  --success:    #4F7A3F;  --success-soft: #E8F0E2;
+  --warning:    #B5832B;  --warning-soft: #F6ECD6;
+  --danger:     #BC4A30;  --danger-soft:  #F6E1DA;
+  --info:       #4A6B7A;  --info-soft:    #E1ECF0;
+
+  /* Surface roles */
+  --bg:           var(--cream);
+  --surface:      var(--white);
+  --surface-sunk: var(--ink-100);
+  --border:       var(--ink-200);
+  --border-strong:var(--ink-300);
+  --text:         var(--ink-800);
+  --text-muted:   var(--ink-600);
+  --text-subtle:  var(--ink-400);
+  --focus-ring:   #8DBE2E;
+
+  /* ----------------------------------------------------------- TYPOGRAPHY */
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-text:    'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono:    'Space Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Type scale (1.25 major-third-ish, tuned) */
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-md:   18px;
+  --text-lg:   21px;
+  --text-xl:   26px;
+  --text-2xl:  33px;
+  --text-3xl:  42px;
+  --text-4xl:  54px;
+  --text-5xl:  68px;
+  --text-6xl:  86px;
+
+  --leading-tight: 1.05;
+  --leading-snug:  1.2;
+  --leading-normal:1.5;
+  --leading-relaxed:1.7;
+
+  --tracking-tight:  -0.02em;
+  --tracking-snug:   -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-caps:   0.12em;
+
+  /* -------------------------------------------------------------- SPACING */
+  --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
+  --space-5: 20px;  --space-6: 24px;  --space-8: 32px;  --space-10: 40px;
+  --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px;
+
+  /* --------------------------------------------------------------- RADII */
+  /* Friendly, generous rounding is core to this brand. */
+  --radius-xs:  6px;
+  --radius-sm:  10px;
+  --radius-md:  14px;   /* default control / card radius */
+  --radius-lg:  18px;
+  --radius-xl:  24px;
+  --radius-2xl: 32px;
+  --radius-pill: 999px;
+
+  /* ------------------------------------------------------------- SHADOWS */
+  /* Soft, diffuse, warm-tinted, low-opacity. Never hard or black. */
+  --shadow-xs: 0 1px 2px rgba(36,34,32,0.05);
+  --shadow-sm: 0 2px 6px rgba(36,34,32,0.06);
+  --shadow-md: 0 6px 20px rgba(36,34,32,0.08);
+  --shadow-lg: 0 16px 44px rgba(36,34,32,0.10);
+  --shadow-pop: 0 6px 18px rgba(150,190,46,0.35); /* lime glow for primary CTA */
+
+  /* --------------------------------------------------------------- MOTION */
+  --ease-out:   cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-spring:cubic-bezier(0.34, 1.56, 0.64, 1); /* gentle overshoot — playful */
+  --dur-fast:   120ms;
+  --dur-base:   200ms;
+  --dur-slow:   320ms;
+}
+
+/* ============================================================================
+   SEMANTIC ELEMENT STYLES
+   Apply via the classes below, or copy into your own components.
+   ========================================================================== */
+
+.wm-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-6xl);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink-900);
+}
+h1, .wm-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-4xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink-900);
+}
+h2, .wm-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-3xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--ink-900);
+}
+h3, .wm-h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--ink-800);
+}
+.wm-lead {
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+  color: var(--text-muted);
+}
+p, .wm-body {
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text);
+}
+.wm-small {
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--text-muted);
+}
+.wm-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+code, .wm-code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--ink-100);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 0.1em 0.4em;
+  color: var(--ink-800);
+}
+
+/* --------------------------------------------------------------- BUTTONS */
+.wm-btn {
+  font-family: var(--font-text);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  white-space: nowrap;
+  padding: 11px 20px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out),
+              background var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.wm-btn:active { transform: scale(0.97); }
+.wm-btn--primary { background: var(--pop); color: var(--pop-ink); box-shadow: var(--shadow-pop); }
+.wm-btn--primary:hover { background: var(--pop-hover); }
+.wm-btn--solid { background: var(--ink-800); color: var(--cream); }
+.wm-btn--solid:hover { background: var(--ink-900); }
+.wm-btn--ghost { background: transparent; color: var(--ink-800); border: 1.5px solid var(--border-strong); }
+.wm-btn--ghost:hover { background: var(--ink-100); border-color: var(--ink-400); }
+
+/* --------------------------------------------------------------- SURFACES */
+.wm-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.wm-input {
+  font-family: var(--font-text);
+  font-size: var(--text-base);
+  color: var(--text);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 11px 14px;
+  transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.wm-input::placeholder { color: var(--text-subtle); }
+.wm-input:focus { outline: none; border-color: var(--focus-ring); box-shadow: 0 0 0 3px var(--pop-soft); }
+
+/* focus-visible ring for all interactive elements */
+.wm-focus:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--pop-soft), 0 0 0 1.5px var(--focus-ring); }

@@ -1,0 +1,11 @@
+---
+import usageData from '../data/usage.json';
+import type { UsageData } from '../lib/usage';
+
+const data = usageData as unknown as UsageData;
+const lastSync = data.meta.lastSync.slice(0, 10);
+---
+<div class="colophon">
+  <span>© 2026 Wasmir</span>
+  <span>最后同步 · {lastSync}</span>
+</div>

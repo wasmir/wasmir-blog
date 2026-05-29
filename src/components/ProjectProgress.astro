@@ -1,0 +1,43 @@
+---
+import { loadProjects, type ProjectStatus } from '../lib/content';
+
+const projects = loadProjects();
+const BADGE: Record<ProjectStatus, { cls: string; label: string }> = {
+  doing:   { cls: 'doing',   label: 'DOING' },
+  todo:    { cls: 'todo',    label: 'TODO' },
+  finish:  { cls: 'done',    label: 'DONE' },
+  dropped: { cls: 'dropped', label: 'DROPPED' },
+};
+---
+<section class="module reveal" id="projects">
+  <div class="module-head">
+    <span class="kicker">Project progress</span>
+  </div>
+  <div class="pj-list">
+    {projects.map((p) => (
+      <div class={`pj-item ${p.status}`}>
+        <div class="pj-head">
+          <span class={`badge ${BADGE[p.status].cls}`}>{BADGE[p.status].label}</span>
+          <span class="pj-name">{p.name}</span>
+          <div class="pj-meta">
+            {p.status === 'doing' && <span class="pj-pct">{p.progress}%</span>}
+            {p.status !== 'doing' && p.platform && <span class="pj-plat">{p.platform}</span>}
+            {p.status === 'finish' && p.link && (
+              <a class="pj-open" href={p.link} target="_blank" rel="noopener noreferrer" aria-label={`打开 ${p.name}`}>
+                打开
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17 17 7"></path>
+                  <path d="M7 7h10v10"></path>
+                </svg>
+              </a>
+            )}
+          </div>
+        </div>
+        <p class="pj-blurb">{p.blurb}</p>
+        {p.status === 'doing' && (
+          <div class="pj-track"><div class="pj-fill" style={`width:${p.progress}%`}></div></div>
+        )}
+      </div>
+    ))}
+  </div>
+</section>

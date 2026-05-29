@@ -1,0 +1,8 @@
+- topic: 微积分 / 线性代数
+  via: 3Blue1Brown
+  status: done
+  progress: 100
+- topic: "Neural Networks: Zero to Hero"
+  via: Andrej Karpathy
+  status: learning
+  progress: 50

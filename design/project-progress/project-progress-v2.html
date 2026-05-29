@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Project progress — 已完成行布局</title>
+<link rel="stylesheet" href="tokens.css" />
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text);
+    font-family: var(--font-text);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--pop); color: var(--pop-ink); }
+
+  /* 同主页版心 712px */
+  .page { max-width: 712px; margin: 0 auto; padding: 64px 24px 120px; }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 22px;
+  }
+  .kicker::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--pop); }
+
+  .note {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-subtle);
+    border-left: 2px solid var(--ink-200);
+    padding-left: 14px;
+    margin: 0 0 40px;
+    max-width: 60ch;
+  }
+  .note b { color: var(--ink-600); font-weight: 600; }
+
+  /* ============================================================
+     STATUS BADGE  (unchanged from current system)
+     ============================================================ */
+  .badge {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    flex: none;
+  }
+  .badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; }
+  .badge.done    { background: var(--ink-100); color: var(--ink-600); }
+  .badge.done::before { background: var(--ink-400); }
+  .badge.doing   { background: var(--pop-soft); color: var(--pop-ink); }
+  .badge.doing::before { background: var(--pop); box-shadow: 0 0 0 3px rgba(198,242,77,0.35); }
+  .badge.todo    { background: transparent; color: var(--ink-500); border: 1px solid var(--border-strong); }
+  .badge.todo::before { background: transparent; box-shadow: inset 0 0 0 1.5px var(--ink-400); }
+  .badge.dropped { background: var(--danger-soft); color: var(--danger); }
+  .badge.dropped::before { background: var(--danger); }
+
+  /* ============================================================
+     PROJECT LIST
+     ============================================================ */
+  .pj-list { border-top: 1px solid var(--border); }
+  .pj-item {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 18px 2px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pj-head { display: flex; align-items: center; gap: 12px; }
+
+  /* name no longer flex:1 — the meta rail claims the right edge via margin-left:auto */
+  .pj-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    color: var(--ink-900);
+    min-width: 0;
+  }
+
+  /* ---- right-anchored meta rail (the fix) ---- */
+  .pj-meta {
+    margin-left: auto;          /* pushes the cluster to the right edge of the head */
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 20px;           /* keeps rows the same height whether or not there's an action */
+  }
+  .pj-plat {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--text-subtle);
+    white-space: nowrap;
+  }
+  .pj-open {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-text);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-600);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .pj-open svg { width: 14px; height: 14px; stroke: currentColor; transition: transform var(--dur-fast) var(--ease-out); }
+  .pj-open:hover { color: var(--ink-900); }
+  .pj-open:hover svg { color: var(--pop-ink); transform: translate(1px, -1px); }
+
+  /* doing keeps its percentage in the same right slot */
+  .pj-pct { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--ink-800); flex: none; }
+
+  /* blurb keeps a comfortable reading measure; no longer the only thing on the right */
+  .pj-blurb { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 0; max-width: 58ch; }
+
+  .pj-track { height: 6px; background: var(--ink-100); border-radius: var(--radius-pill); overflow: hidden; }
+  .pj-fill  { height: 100%; background: var(--pop); border-radius: var(--radius-pill); }
+
+  .pj-item.dropped { opacity: 0.55; }
+  .pj-item.dropped .pj-name { text-decoration: line-through; text-decoration-color: var(--ink-400); color: var(--ink-500); }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <span class="kicker">Project progress</span>
+
+  <p class="note">
+    已完成 / 废弃行的右侧空白，用一条<b>右对齐的 meta rail</b> 补上：平台标签（mono 微标签）+ 可选的「打开」动作。
+    内容锚定行的<b>左右两端</b>，中间留白就变成有意的呼吸，而不是失衡的空洞。lime 只在「打开」hover 时点一下。
+  </p>
+
+  <div class="pj-list">
+
+    <!-- DOING — 百分比仍在右侧同一个 slot，进度条满宽在下方 -->
+    <div class="pj-item doing">
+      <div class="pj-head">
+        <span class="badge doing">DOING</span>
+        <span class="pj-name">AboutMeinAI</span>
+        <div class="pj-meta"><span class="pj-pct">70%</span></div>
+      </div>
+      <p class="pj-blurb">你正在看的这个站。把我和 AI 协作的轨迹摊开来给人看。</p>
+      <div class="pj-track"><div class="pj-fill" style="width:70%"></div></div>
+    </div>
+
+    <!-- TODO — 计划平台标签占住右边 -->
+    <div class="pj-item todo">
+      <div class="pj-head">
+        <span class="badge todo">TODO</span>
+        <span class="pj-name">本地笔记 RAG 问答</span>
+        <div class="pj-meta"><span class="pj-plat">本地</span></div>
+      </div>
+      <p class="pj-blurb">把这些年的笔记接进本地检索，问它就行 —— 还没动手。</p>
+    </div>
+
+    <!-- DONE + link -->
+    <div class="pj-item finish">
+      <div class="pj-head">
+        <span class="badge done">DONE</span>
+        <span class="pj-name">Boofa</span>
+        <div class="pj-meta">
+          <span class="pj-plat">macOS</span>
+          <a class="pj-open" href="#" target="_blank" rel="noopener">打开<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+        </div>
+      </div>
+      <p class="pj-blurb">一个 macOS 端的快速文本草稿工具，能在任意界面用快捷键呼出立即记录笔记。全屏看视频 / 一堆 Agent 在跑的同时想记点什么，可以快速打开快速记录。</p>
+    </div>
+
+    <!-- DONE + link -->
+    <div class="pj-item finish">
+      <div class="pj-head">
+        <span class="badge done">DONE</span>
+        <span class="pj-name">Yeliner</span>
+        <div class="pj-meta">
+          <span class="pj-plat">iOS</span>
+          <a class="pj-open" href="#" target="_blank" rel="noopener">打开<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+        </div>
+      </div>
+      <p class="pj-blurb">一个 iOS 端的原生大纲笔记工具。现在 iOS 上的大纲笔记多是套壳、看着有点古老，所以想自己搓一个玩玩。</p>
+    </div>
+
+    <!-- DONE, no link — 只有平台标签，没有动作 -->
+    <div class="pj-item finish">
+      <div class="pj-head">
+        <span class="badge done">DONE</span>
+        <span class="pj-name">PPTAutoGen</span>
+        <div class="pj-meta"><span class="pj-plat">工作流</span></div>
+      </div>
+      <p class="pj-blurb">一套小学课件 PPT 的生成工作流，可以根据教材内容自动生成课程 PPT 以及配套素材 —— 月入过万。</p>
+    </div>
+
+    <!-- DROPPED — 平台标签保留（变灰），不给动作 -->
+    <div class="pj-item dropped">
+      <div class="pj-head">
+        <span class="badge dropped">DROPPED</span>
+        <span class="pj-name">Picasso AI</span>
+        <div class="pj-meta"><span class="pj-plat">网页</span></div>
+      </div>
+      <p class="pj-blurb">视频生成套壳站，做一半发现没必要，先搁置了。</p>
+    </div>
+
+  </div>
+
+</main>
+</body>
+</html>
