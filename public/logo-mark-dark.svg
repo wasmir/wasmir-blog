@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Wasmir">
+  <rect width="120" height="120" rx="31" fill="#1A1916"></rect>
+  <path d="M27 46 L40 82 L53 56 L66 82 L79 46" fill="none" stroke="#FBFAF6" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"></path>
+  <circle cx="95" cy="77" r="7.5" fill="#C6F24D"></circle>
+</svg>
