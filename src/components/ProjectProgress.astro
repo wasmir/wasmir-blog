@@ -22,7 +22,7 @@ const BADGE: Record<ProjectStatus, { cls: string; label: string }> = {
           <div class="pj-meta">
             {p.status === 'doing' && <span class="pj-pct">{p.progress}%</span>}
             {p.status !== 'doing' && p.platform && <span class="pj-plat">{p.platform}</span>}
-            {p.status === 'finish' && p.link && (
+            {p.link && (
               <a class="pj-open" href={p.link} target="_blank" rel="noopener noreferrer" aria-label={`打开 ${p.name}`}>
                 打开
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
