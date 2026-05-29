@@ -1,8 +1,6 @@
 import { defineConfig } from 'astro/config';
 
-// GitHub Pages（项目页）：仓库名 = wasmir-blog。
-// 若改用用户页仓库 <user>.github.io，则删掉 base、site 改成 https://<user>.github.io。
+// 自定义域名：站点托管在 wasmir.com 根目录，无需 base。
 export default defineConfig({
-  site: 'https://wasmir.github.io',
-  base: '/wasmir-blog',
+  site: 'https://wasmir.com',
 });
