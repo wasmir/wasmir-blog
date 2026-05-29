@@ -12,6 +12,11 @@
   blurb: 一套小学课件 PPT 的生成工作流，可以根据教材内容自动生成课程 PPT 以及配套的教学设计、网页等材料。用来卖钱的，最高达到了月入过万呢 🤣
   status: finish
   platform: 工作流
+- name: yegePoke
+  blurb: 为了和好盆友在线德州，自己做了一个德州站点，出色的嘲讽动画深受好评😈 打得最多的小伙伴打了 6953 手牌，我一共打了 2288 手牌，输了一块一毛七😢
+  status: finish
+  link: https://yege.wasmir.com:8443
+  platform: Web
 - name: Picasso AI
   blurb: 视频生成套壳站。原本想和认识的电商团队合作，但项目核心是低价资源，搞不来。
   status: dropped
