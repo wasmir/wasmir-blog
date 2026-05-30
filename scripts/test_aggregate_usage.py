@@ -59,6 +59,56 @@ class AggregateTest(unittest.TestCase):
             self.assertEqual(acc["2026-05-02"]["codex"], 650)
             self.assertEqual(acc["2026-05-02"]["claude"], 0)
 
+    def test_since_filters_out_older_days(self):
+        with tempfile.TemporaryDirectory() as root:
+            claude = os.path.join(root, ".claude")
+            codex = os.path.join(root, ".codex")
+            _write(os.path.join(claude, "projects", "p", "a.jsonl"), [
+                {"timestamp": "2026-05-01T10:00:00Z",
+                 "message": {"usage": {"input_tokens": 100, "output_tokens": 0}}},
+                {"timestamp": "2026-05-05T10:00:00Z",
+                 "message": {"usage": {"input_tokens": 200, "output_tokens": 0}}},
+            ])
+            os.makedirs(codex)
+            # since 之前的天被剔除；since 当天（含）保留
+            acc = agg.aggregate(claude, codex, since="2026-05-05")
+            self.assertNotIn("2026-05-01", acc)
+            self.assertEqual(acc["2026-05-05"]["claude"], 200)
+
+    def test_since_is_inclusive_of_boundary(self):
+        with tempfile.TemporaryDirectory() as root:
+            claude = os.path.join(root, ".claude")
+            codex = os.path.join(root, ".codex")
+            _write(os.path.join(claude, "projects", "p", "a.jsonl"), [
+                {"timestamp": "2026-05-03T10:00:00Z",
+                 "message": {"usage": {"input_tokens": 50, "output_tokens": 0}}},
+            ])
+            os.makedirs(codex)
+            acc = agg.aggregate(claude, codex, since="2026-05-03")
+            self.assertEqual(acc["2026-05-03"]["claude"], 50)
+
+    def test_no_since_keeps_all_days(self):
+        with tempfile.TemporaryDirectory() as root:
+            claude = os.path.join(root, ".claude")
+            codex = os.path.join(root, ".codex")
+            _write(os.path.join(claude, "projects", "p", "a.jsonl"), [
+                {"timestamp": "2025-01-01T10:00:00Z",
+                 "message": {"usage": {"input_tokens": 7, "output_tokens": 0}}},
+                {"timestamp": "2026-05-05T10:00:00Z",
+                 "message": {"usage": {"input_tokens": 9, "output_tokens": 0}}},
+            ])
+            os.makedirs(codex)
+            acc = agg.aggregate(claude, codex)
+            self.assertEqual(acc["2025-01-01"]["claude"], 7)
+            self.assertEqual(acc["2026-05-05"]["claude"], 9)
+
+    def test_parse_since_cli_forms(self):
+        # collect-usage.mjs 与 ssh `python3 -` 真正经过的传参接缝
+        self.assertEqual(agg._parse_since(["--since", "2026-05-05"]), "2026-05-05")
+        self.assertEqual(agg._parse_since(["--since=2026-05-05"]), "2026-05-05")
+        self.assertIsNone(agg._parse_since([]))
+        self.assertIsNone(agg._parse_since(["-"]))  # 多余占位参数，不当作 since
+
     def test_missing_roots_yield_empty(self):
         with tempfile.TemporaryDirectory() as root:
             acc = agg.aggregate(os.path.join(root, "nope1"), os.path.join(root, "nope2"))
