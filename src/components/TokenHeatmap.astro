@@ -1,8 +1,8 @@
 ---
 import usageData from '../data/usage.json';
 import {
-  buildGrid, dataLossBandWidth, monthLabels, computeMetrics, formatM, cellTitle,
-  type UsageData,
+  buildGrid, dataLossBandWidth, monthLabels, computeMetrics, formatTokens, cellTitle,
+  type UsageData, type Metric,
 } from '../lib/usage';
 
 const data = usageData as unknown as UsageData;
@@ -12,33 +12,52 @@ const today = new Date().toISOString().slice(0, 10);
 // 统一当作「数据缺失」——只改这一个值，永远不要动 markup（见设计 handoff）。
 const DATA_START = '2026-04-16';
 
-const cells = buildGrid(data.byDay, today, DATA_START);
-const months = monthLabels(cells);
-const bandWidth = dataLossBandWidth(cells); // 0 = 不渲染蒙版
+// 几何（格子日期/empty/lost、月份标签、data-loss 蒙版）与口径无关，只算一次。
+const geomCells = buildGrid(data.byDay, today, DATA_START, 'nocache');
+const months = monthLabels(geomCells);
+const bandWidth = dataLossBandWidth(geomCells); // 0 = 不渲染蒙版
 
 // 汇总数字只统计真实记录区（>= 数据起点）。
 const liveByDay = Object.fromEntries(
   Object.entries(data.byDay).filter(([date]) => date >= DATA_START),
 );
-const m = computeMetrics(liveByDay, today);
 
-const summary = [
-  { num: formatM(m.cumulative, 0), unit: 'M', label: '累计 token', peak: false },
-  { num: String(m.streak),         unit: '天', label: '最长连续 streak', peak: false },
-  { num: formatM(m.peak, 1),       unit: 'M', label: '单日峰值', peak: true },
-  { num: formatM(m.thisMonth, 0),  unit: 'M', label: '本月 token', peak: false },
-];
+// 对某一口径算出 {汇总 4 数, 每格 class+title}。两套都算，前端切换时直接套用。
+function viewFor(metric: Metric) {
+  const cells = buildGrid(data.byDay, today, DATA_START, metric);
+  const m = computeMetrics(liveByDay, today, metric);
+  const summary = [
+    { ...formatTokens(m.cumulative, 0), label: '累计 token', peak: false },
+    { num: String(m.streak), unit: '天', label: '最长连续 streak', peak: false },
+    { ...formatTokens(m.peak, 1), label: '单日峰值', peak: true },
+    { ...formatTokens(m.thisMonth, 0), label: '本月 token', peak: false },
+  ];
+  const cellView = cells.map((c) => ({
+    cls: c.empty ? 'cell empty' : c.lost ? 'cell lost' : `cell l${c.level}`,
+    title: cellTitle(c),
+  }));
+  return { summary, cellView };
+}
+
+const DEFAULT: Metric = 'cache';
+const views = { cache: viewFor('cache'), nocache: viewFor('nocache') };
+const viewsJson = JSON.stringify(views);
+const def = views[DEFAULT];
 const weekdays = ['', '一', '', '三', '', '五', ''];
 ---
 <section class="module reveal" id="tokens">
   <div class="module-head">
     <span class="kicker">Token activity</span>
+    <div class="heat-toggle" role="group" aria-label="token 口径切换">
+      <button type="button" class="ht-btn is-active" data-metric="cache" aria-pressed="true">Total</button>
+      <button type="button" class="ht-btn" data-metric="nocache" aria-pressed="false">No-cache</button>
+    </div>
   </div>
   <div class="heat-card">
     <div class="heat-summary">
-      {summary.map((s) => (
+      {def.summary.map((s) => (
         <div class={s.peak ? 'summary-item peak' : 'summary-item'}>
-          <div class="s-num">{s.num}<span class="unit">{s.unit}</span></div>
+          <div class="s-num" set:html={`${s.num}<span class="unit">${s.unit}</span>`}></div>
           <div class="s-lbl">{s.label}</div>
         </div>
       ))}
@@ -54,11 +73,8 @@ const weekdays = ['', '一', '', '三', '', '五', ''];
             {months.map((label) => <span>{label}</span>)}
           </div>
           <div class="heat-cells">
-            {cells.map((cell) => (
-              <div
-                class={cell.empty ? 'cell empty' : cell.lost ? 'cell lost' : `cell l${cell.level}`}
-                title={cellTitle(cell)}
-              ></div>
+            {def.cellView.map((cv) => (
+              <div class={cv.cls} title={cv.title}></div>
             ))}
             {bandWidth > 0 && (
               <div class="heat-loss" style={`width:${bandWidth}px`} aria-hidden="true">
@@ -91,4 +107,79 @@ const weekdays = ['', '一', '', '三', '', '五', ''];
       <span>多</span>
     </div>
   </div>
+
+  <script type="application/json" id="heat-views" set:html={viewsJson}></script>
+  <script is:inline>
+    (() => {
+      const root = document.getElementById('tokens');
+      if (!root) return;
+      const node = document.getElementById('heat-views');
+      if (!node) return;
+      const views = JSON.parse(node.textContent);
+      const cells = Array.from(root.querySelectorAll('.heat-cells .cell'));
+      const nums = Array.from(root.querySelectorAll('.heat-summary .s-num'));
+      const btns = Array.from(root.querySelectorAll('.ht-btn'));
+      function apply(metric) {
+        const v = views[metric];
+        if (!v) return;
+        cells.forEach((el, i) => {
+          const cv = v.cellView[i];
+          if (!cv) return;
+          el.className = cv.cls;
+          if (cv.title) el.setAttribute('title', cv.title);
+          else el.removeAttribute('title');
+        });
+        nums.forEach((el, i) => {
+          const s = v.summary[i];
+          if (s) el.innerHTML = s.num + '<span class="unit">' + s.unit + '</span>';
+        });
+        btns.forEach((b) => {
+          const on = b.dataset.metric === metric;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+      }
+      btns.forEach((b) => b.addEventListener('click', () => apply(b.dataset.metric)));
+    })();
+  </script>
 </section>
+
+<style>
+  .heat-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-xs);
+  }
+  .ht-btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    padding: 5px 13px;
+    border-radius: var(--radius-pill);
+    line-height: 1;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .ht-btn:hover { color: var(--ink-800); }
+  .ht-btn.is-active {
+    background: var(--pop);
+    color: var(--pop-ink);
+  }
+  .ht-btn:focus-visible {
+    outline: 2px solid var(--pop-ink);
+    outline-offset: 1px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ht-btn { transition: none; }
+  }
+</style>

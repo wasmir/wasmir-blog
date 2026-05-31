@@ -1,10 +1,13 @@
 export type Tool = 'claude' | 'codex';
-export type MachineBucket = Record<string, Partial<Record<Tool, number>>>;
+export type Metric = 'nocache' | 'cache';
+// 每个 tool 两套口径：nocache=纯输出（不含 cache）；cache=含缓存总吞吐。
+export interface MetricPair { nocache: number; cache: number; }
+export type MachineBucket = Record<string, Partial<Record<Tool, MetricPair>>>;
 export type ByDay = Record<string, MachineBucket>;
 
 export interface UsageMeta {
   lastSync: string;
-  metric: string;
+  metrics: string[];
   tools: string[];
   machines: string[];
 }
@@ -45,30 +48,36 @@ function weekday(date: string): number {
   return toUTC(date).getUTCDay(); // 0=Sun .. 6=Sat
 }
 
-// ---------- 求和 ----------
-export function dayTotal(bucket: MachineBucket): number {
+// ---------- 求和（按口径）----------
+export function dayTotal(bucket: MachineBucket, metric: Metric): number {
   let sum = 0;
   for (const tools of Object.values(bucket)) {
-    sum += (tools.claude ?? 0) + (tools.codex ?? 0);
+    sum += (tools.claude?.[metric] ?? 0) + (tools.codex?.[metric] ?? 0);
   }
   return sum;
 }
-export function dailyTotals(byDay: ByDay): Record<string, number> {
+export function dailyTotals(byDay: ByDay, metric: Metric): Record<string, number> {
   const out: Record<string, number> = {};
   for (const [date, bucket] of Object.entries(byDay)) {
-    out[date] = dayTotal(bucket);
+    out[date] = dayTotal(bucket, metric);
   }
   return out;
 }
 
-// ---------- 分级（经典 GitHub 绿阶，固定阈值，单位 M）----------
-// l0 <0.12（安静/空）· l1 <1 · l2 <2 · l3 <3 · l4 ≥3
-export function gradeLevel(tokens: number): Level {
-  const m = tokens / 1e6;
-  if (m < 0.12) return 0;
-  if (m < 1.0) return 1;
-  if (m < 2.0) return 2;
-  if (m < 3.0) return 3;
+// ---------- 分级（经典 GitHub 绿阶，按口径各一套固定阈值，单位 token）----------
+// 上界数组：tokens < t[i] → 级 i；否则 4。
+// nocache（M）：<0.12 · <1 · <2 · <3 · ≥3
+// cache（M，据每日分布 p25≈2.6/p50≈22/p75≈116/p90≈500）：<1 · <25 · <100 · <500 · ≥500
+const THRESHOLDS: Record<Metric, [number, number, number, number]> = {
+  nocache: [0.12e6, 1e6, 2e6, 3e6],
+  cache: [1e6, 25e6, 100e6, 500e6],
+};
+export function gradeLevel(tokens: number, metric: Metric): Level {
+  const t = THRESHOLDS[metric];
+  if (tokens < t[0]) return 0;
+  if (tokens < t[1]) return 1;
+  if (tokens < t[2]) return 2;
+  if (tokens < t[3]) return 3;
   return 4;
 }
 
@@ -85,8 +94,8 @@ function longestStreak(totals: Record<string, number>): number {
   }
   return best;
 }
-export function computeMetrics(byDay: ByDay, today: string): Metrics {
-  const totals = dailyTotals(byDay);
+export function computeMetrics(byDay: ByDay, today: string, metric: Metric): Metrics {
+  const totals = dailyTotals(byDay, metric);
   const month = today.slice(0, 7);
   let cumulative = 0, peak = 0, thisMonth = 0;
   for (const [date, val] of Object.entries(totals)) {
@@ -99,8 +108,8 @@ export function computeMetrics(byDay: ByDay, today: string): Metrics {
 
 // ---------- 53×7 网格（滚动一年窗口，列优先，周日在上）----------
 // cutoff 之前的非未来格标记为 lost（数据缺失）；今天之后为 empty。
-export function buildGrid(byDay: ByDay, today: string, cutoff?: string): Cell[] {
-  const totals = dailyTotals(byDay);
+export function buildGrid(byDay: ByDay, today: string, cutoff: string | undefined, metric: Metric): Cell[] {
+  const totals = dailyTotals(byDay, metric);
   const gridEnd = addDays(today, 6 - weekday(today));   // 本周周六
   const gridStart = addDays(gridEnd, -(53 * 7 - 1));    // 53 周前的周日
   const cells: Cell[] = [];
@@ -112,7 +121,7 @@ export function buildGrid(byDay: ByDay, today: string, cutoff?: string): Cell[] 
     cells.push({
       date: cur,
       tokens,
-      level: future || lost ? 0 : gradeLevel(tokens),
+      level: future || lost ? 0 : gradeLevel(tokens, metric),
       empty: future,
       lost,
     });
@@ -149,15 +158,16 @@ export function monthLabels(cells: Cell[]): string[] {
   return labels;
 }
 
-// ---------- 格式化 ----------
-export function formatM(tokens: number, decimals = 1): string {
-  return (tokens / 1e6).toFixed(decimals);
+// ---------- 格式化（M/B 自适应）----------
+// ≥1000M 进位为 B（恒 1 位小数）；否则按 decimals 显示 M。返回 {num, unit} 便于分开渲染单位。
+export function formatTokens(tokens: number, decimals = 1): { num: string; unit: string } {
+  if (tokens >= 1e9) return { num: (tokens / 1e9).toFixed(1), unit: 'B' };
+  return { num: (tokens / 1e6).toFixed(decimals), unit: 'M' };
 }
 export function cellTitle(cell: Cell): string {
   if (cell.empty) return '';
   if (cell.lost) return `${cell.date} · 数据缺失`;
   if (cell.tokens <= 0) return `${cell.date} · 安静的一天`;
-  const m = cell.tokens / 1e6;
-  const s = m >= 0.1 ? m.toFixed(1) : m.toFixed(2);
-  return `${cell.date} · ${s}M tokens`;
+  const { num, unit } = formatTokens(cell.tokens, cell.tokens >= 0.1e6 ? 1 : 2);
+  return `${cell.date} · ${num}${unit} tokens`;
 }

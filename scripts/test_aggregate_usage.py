@@ -22,23 +22,25 @@ def _write(path, lines):
 
 
 class AggregateTest(unittest.TestCase):
-    def test_claude_io_sum_and_skip(self):
+    def test_claude_dual_metric_sum_and_skip(self):
         with tempfile.TemporaryDirectory() as root:
             claude = os.path.join(root, ".claude")
             codex = os.path.join(root, ".codex")
             _write(os.path.join(claude, "projects", "p", "a.jsonl"), [
                 {"timestamp": "2026-05-01T10:00:00Z",
-                 "message": {"usage": {"input_tokens": 100, "output_tokens": 50}}},
+                 "message": {"usage": {"input_tokens": 100, "output_tokens": 50,
+                                       "cache_read_input_tokens": 1000, "cache_creation_input_tokens": 500}}},
                 {"timestamp": "2026-05-01T11:00:00Z",
                  "message": {"usage": {"input_tokens": 30, "output_tokens": 20}}},
                 {"timestamp": "2026-05-01T12:00:00Z", "message": {}},  # 无 usage，跳过
             ])
             os.makedirs(codex)
             acc = agg.aggregate(claude, codex)
-            self.assertEqual(acc["2026-05-01"]["claude"], 200)
-            self.assertEqual(acc["2026-05-01"]["codex"], 0)
+            # nocache = (100+50)+(30+20) = 200；cache = 200 + (1000+500) = 1700
+            self.assertEqual(acc["2026-05-01"]["claude"], {"nocache": 200, "cache": 1700})
+            self.assertEqual(acc["2026-05-01"]["codex"], {"nocache": 0, "cache": 0})
 
-    def test_codex_subtracts_cached_and_skips_null_info(self):
+    def test_codex_dual_metric(self):
         with tempfile.TemporaryDirectory() as root:
             claude = os.path.join(root, ".claude")
             codex = os.path.join(root, ".codex")
@@ -55,9 +57,23 @@ class AggregateTest(unittest.TestCase):
                  "payload": {"type": "agent_message"}},  # 非 token_count，跳过
             ])
             acc = agg.aggregate(claude, codex)
-            # (1000-600) + 200 + 50 = 650
-            self.assertEqual(acc["2026-05-02"]["codex"], 650)
-            self.assertEqual(acc["2026-05-02"]["claude"], 0)
+            # nocache = (1000-600)+200+50 = 650；cache = 1000+200+50 = 1250
+            self.assertEqual(acc["2026-05-02"]["codex"], {"nocache": 650, "cache": 1250})
+            self.assertEqual(acc["2026-05-02"]["claude"], {"nocache": 0, "cache": 0})
+
+    def test_cache_never_below_nocache(self):
+        with tempfile.TemporaryDirectory() as root:
+            claude = os.path.join(root, ".claude")
+            codex = os.path.join(root, ".codex")
+            _write(os.path.join(claude, "projects", "p", "a.jsonl"), [
+                {"timestamp": "2026-05-03T10:00:00Z",
+                 "message": {"usage": {"input_tokens": 10, "output_tokens": 5,
+                                       "cache_read_input_tokens": 9999}}},
+            ])
+            os.makedirs(codex)
+            acc = agg.aggregate(claude, codex)
+            d = acc["2026-05-03"]["claude"]
+            self.assertGreaterEqual(d["cache"], d["nocache"])
 
     def test_since_filters_out_older_days(self):
         with tempfile.TemporaryDirectory() as root:
@@ -70,22 +86,9 @@ class AggregateTest(unittest.TestCase):
                  "message": {"usage": {"input_tokens": 200, "output_tokens": 0}}},
             ])
             os.makedirs(codex)
-            # since 之前的天被剔除；since 当天（含）保留
             acc = agg.aggregate(claude, codex, since="2026-05-05")
             self.assertNotIn("2026-05-01", acc)
-            self.assertEqual(acc["2026-05-05"]["claude"], 200)
-
-    def test_since_is_inclusive_of_boundary(self):
-        with tempfile.TemporaryDirectory() as root:
-            claude = os.path.join(root, ".claude")
-            codex = os.path.join(root, ".codex")
-            _write(os.path.join(claude, "projects", "p", "a.jsonl"), [
-                {"timestamp": "2026-05-03T10:00:00Z",
-                 "message": {"usage": {"input_tokens": 50, "output_tokens": 0}}},
-            ])
-            os.makedirs(codex)
-            acc = agg.aggregate(claude, codex, since="2026-05-03")
-            self.assertEqual(acc["2026-05-03"]["claude"], 50)
+            self.assertEqual(acc["2026-05-05"]["claude"]["nocache"], 200)
 
     def test_no_since_keeps_all_days(self):
         with tempfile.TemporaryDirectory() as root:
@@ -99,15 +102,14 @@ class AggregateTest(unittest.TestCase):
             ])
             os.makedirs(codex)
             acc = agg.aggregate(claude, codex)
-            self.assertEqual(acc["2025-01-01"]["claude"], 7)
-            self.assertEqual(acc["2026-05-05"]["claude"], 9)
+            self.assertEqual(acc["2025-01-01"]["claude"]["nocache"], 7)
+            self.assertEqual(acc["2026-05-05"]["claude"]["nocache"], 9)
 
     def test_parse_since_cli_forms(self):
-        # collect-usage.mjs 与 ssh `python3 -` 真正经过的传参接缝
         self.assertEqual(agg._parse_since(["--since", "2026-05-05"]), "2026-05-05")
         self.assertEqual(agg._parse_since(["--since=2026-05-05"]), "2026-05-05")
         self.assertIsNone(agg._parse_since([]))
-        self.assertIsNone(agg._parse_since(["-"]))  # 多余占位参数，不当作 since
+        self.assertIsNone(agg._parse_since(["-"]))
 
     def test_missing_roots_yield_empty(self):
         with tempfile.TemporaryDirectory() as root:

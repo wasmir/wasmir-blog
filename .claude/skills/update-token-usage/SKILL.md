@@ -10,8 +10,10 @@ description: 当需要更新 / 刷新 wasmir 首页「Token activity」热力图
 
 ## 增量原理（为什么不全量）
 
-`usage.json` 是唯一的持久聚合记录。`scripts/aggregate-usage.py` 全量扫描会在老 session
-日志被清理/轮转时，把那台机器对应的历史天数也覆盖为缺失 → 丢历史。
+`usage.json` 是唯一的持久聚合记录。每个 tool 存**双口径** `{nocache, cache}`：`cache` 含缓存
+（Claude 加 `cache_creation`+`cache_read`；Codex 不减 `cached_input_tokens`），首页可切换显示。
+`scripts/aggregate-usage.py` 全量扫描会在老 session 日志被清理/轮转时，把那台机器对应的历史天数也
+覆盖为缺失 → 丢历史。
 
 所以 `collect-usage.mjs` 先读现有 `meta.lastSync`，经 `scripts/since.mjs` 的 `computeSince`
 算出 `since`（= lastSync 当天往前留 **3 天**缓冲），只用 `--since` 重算最近几天：
@@ -39,24 +41,27 @@ description: 当需要更新 / 刷新 wasmir 首页「Token activity」热力图
    ```
    **若无任何改动** → 报告「token 用量无新增，跳过提交」，到此结束。
 
-3. **报告首页 4 个数字**（口径与 `src/components/TokenHeatmap.astro` 一致；指标逻辑在 `src/lib/usage.ts`）：
+3. **报告首页两套口径各 4 个数字**（口径/取整与 `src/components/TokenHeatmap.astro` 一致；
+   指标逻辑在 `src/lib/usage.ts`。数据每个 tool 是 `{nocache, cache}` 双口径）：
    ```bash
    node --input-type=module -e '
    import data from "./src/data/usage.json" with { type: "json" };
    const DATA_START = "2026-04-16"; // 必须与 src/components/TokenHeatmap.astro 保持一致
-   const tot = b => Object.values(b).reduce((s,t)=>s+(t.claude||0)+(t.codex||0),0);
-   const days = Object.entries(data.byDay).filter(([d])=>d>=DATA_START)
-     .map(([d,b])=>[d,tot(b)]).sort();
-   const m = (n,d) => (n/1e6).toFixed(d); // = usage.ts 的 formatM：累计/本月用 0 位、峰值用 1 位
-   const cum = days.reduce((s,[,v])=>s+v,0);
+   const fmt = (n,d) => n>=1e9 ? (n/1e9).toFixed(1)+"B" : (n/1e6).toFixed(d)+"M"; // = usage.ts formatTokens
+   const tot = (b,m) => Object.values(b).reduce((s,t)=>s+((t.claude&&t.claude[m])||0)+((t.codex&&t.codex[m])||0),0);
    const month = new Date().toISOString().slice(0,7); // 同 TokenHeatmap.astro：按「今天」的月份
-   const thisMonth = days.filter(([d])=>d.slice(0,7)===month).reduce((s,[,v])=>s+v,0);
-   const peak = Math.max(0,...days.map(([,v])=>v));
-   let best=0,run=0,prev=null;
-   for (const [d,v] of days){ if(v<=0){run=0;prev=d;continue;}
-     const p=new Date(d+"T00:00:00Z"); p.setUTCDate(p.getUTCDate()-1);
-     run = (prev===p.toISOString().slice(0,10))?run+1:1; if(run>best)best=run; prev=d; }
-   console.log(`累计 ${m(cum,0)}M · 最长 streak ${best} 天 · 单日峰值 ${m(peak,1)}M · 本月 ${m(thisMonth,0)}M`);
+   for (const metric of ["cache","nocache"]) {
+     const days = Object.entries(data.byDay).filter(([d])=>d>=DATA_START).map(([d,b])=>[d,tot(b,metric)]).sort();
+     const cum = days.reduce((s,[,v])=>s+v,0);
+     const thisMonth = days.filter(([d])=>d.slice(0,7)===month).reduce((s,[,v])=>s+v,0);
+     const peak = Math.max(0,...days.map(([,v])=>v));
+     let best=0,run=0,prev=null;
+     for (const [d,v] of days){ if(v<=0){run=0;prev=d;continue;}
+       const p=new Date(d+"T00:00:00Z"); p.setUTCDate(p.getUTCDate()-1);
+       run = (prev===p.toISOString().slice(0,10))?run+1:1; if(run>best)best=run; prev=d; }
+     const tag = metric==="cache" ? "Total " : "No-cache";
+     console.log(`[${tag}] 累计 ${fmt(cum,0)} · 最长 streak ${best} 天 · 单日峰值 ${fmt(peak,1)} · 本月 ${fmt(thisMonth,0)}`);
+   }
    '
    ```
 

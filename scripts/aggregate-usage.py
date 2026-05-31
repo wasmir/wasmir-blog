@@ -10,16 +10,18 @@ import os
 import sys
 
 
-def _add(acc, date, tool, tokens, since=None):
-    if not date or tokens <= 0:
+def _add(acc, date, tool, nocache, cache, since=None):
+    # cache（含缓存总量）>= nocache >= 0；cache<=0 即整条无量，跳过。
+    if not date or cache <= 0:
         return
     if since and date < since:  # 增量：只收 since（含）及以后的天
         return
     day = acc.get(date)
     if day is None:
-        day = {"claude": 0, "codex": 0}
+        day = {"claude": {"nocache": 0, "cache": 0}, "codex": {"nocache": 0, "cache": 0}}
         acc[date] = day
-    day[tool] += tokens
+    day[tool]["nocache"] += nocache
+    day[tool]["cache"] += cache
 
 
 def _iter_json_lines(path):
@@ -45,8 +47,10 @@ def parse_claude(acc, claude_root, since=None):
             if not usage:
                 continue
             date = (rec.get("timestamp") or "")[:10]
-            io = (usage.get("input_tokens") or 0) + (usage.get("output_tokens") or 0)
-            _add(acc, date, "claude", io, since)
+            nocache = (usage.get("input_tokens") or 0) + (usage.get("output_tokens") or 0)
+            cache = (nocache + (usage.get("cache_creation_input_tokens") or 0)
+                     + (usage.get("cache_read_input_tokens") or 0))
+            _add(acc, date, "claude", nocache, cache, since)
 
 
 def parse_codex(acc, codex_root, since=None):
@@ -60,11 +64,14 @@ def parse_codex(acc, codex_root, since=None):
             if not info:
                 continue
             u = info.get("last_token_usage") or {}
-            io = ((u.get("input_tokens") or 0) - (u.get("cached_input_tokens") or 0)
-                  + (u.get("output_tokens") or 0)
-                  + (u.get("reasoning_output_tokens") or 0))
+            inp = u.get("input_tokens") or 0
+            cached = u.get("cached_input_tokens") or 0
+            out = u.get("output_tokens") or 0
+            rea = u.get("reasoning_output_tokens") or 0
+            nocache = inp - cached + out + rea  # 减掉缓存命中的输入
+            cache = inp + out + rea             # 含缓存：不减
             date = (rec.get("timestamp") or "")[:10]
-            _add(acc, date, "codex", io, since)
+            _add(acc, date, "codex", nocache, cache, since)
 
 
 def aggregate(claude_root, codex_root, since=None):
