@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastSync": "2026-05-31T03:19:56.326Z",
+    "lastSync": "2026-06-01T16:36:12.383Z",
     "metrics": [
       "nocache",
       "cache"
@@ -1254,12 +1254,24 @@
     "2026-05-31": {
       "macbook": {
         "claude": {
-          "nocache": 188776,
-          "cache": 14093906
+          "nocache": 5262887,
+          "cache": 390354361
         },
         "codex": {
-          "nocache": 0,
-          "cache": 0
+          "nocache": 1739388,
+          "cache": 14116476
+        }
+      }
+    },
+    "2026-06-01": {
+      "macbook": {
+        "claude": {
+          "nocache": 2891330,
+          "cache": 230062174
+        },
+        "codex": {
+          "nocache": 2558104,
+          "cache": 32044312
         }
       }
     }
