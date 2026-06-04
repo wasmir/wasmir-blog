@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastSync": "2026-06-01T16:36:12.383Z",
+    "lastSync": "2026-06-04T07:18:55.182Z",
     "metrics": [
       "nocache",
       "cache"
@@ -1266,12 +1266,48 @@
     "2026-06-01": {
       "macbook": {
         "claude": {
-          "nocache": 2891330,
-          "cache": 230062174
+          "nocache": 3275234,
+          "cache": 244317408
         },
         "codex": {
           "nocache": 2558104,
           "cache": 32044312
+        }
+      }
+    },
+    "2026-06-04": {
+      "macbook": {
+        "claude": {
+          "nocache": 16888,
+          "cache": 89344
+        },
+        "codex": {
+          "nocache": 1703470,
+          "cache": 19210798
+        }
+      }
+    },
+    "2026-06-02": {
+      "macbook": {
+        "claude": {
+          "nocache": 2364962,
+          "cache": 164019590
+        },
+        "codex": {
+          "nocache": 313747,
+          "cache": 4514195
+        }
+      }
+    },
+    "2026-06-03": {
+      "macbook": {
+        "claude": {
+          "nocache": 1024576,
+          "cache": 54375220
+        },
+        "codex": {
+          "nocache": 2396310,
+          "cache": 20983062
         }
       }
     }
