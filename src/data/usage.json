@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastSync": "2026-06-04T07:18:55.182Z",
+    "lastSync": "2026-06-12T08:49:52.494Z",
     "metrics": [
       "nocache",
       "cache"
@@ -1278,12 +1278,12 @@
     "2026-06-04": {
       "macbook": {
         "claude": {
-          "nocache": 16888,
-          "cache": 89344
+          "nocache": 897247,
+          "cache": 41832433
         },
         "codex": {
-          "nocache": 1703470,
-          "cache": 19210798
+          "nocache": 3989528,
+          "cache": 57553816
         }
       }
     },
@@ -1308,6 +1308,78 @@
         "codex": {
           "nocache": 2396310,
           "cache": 20983062
+        }
+      }
+    },
+    "2026-06-12": {
+      "macbook": {
+        "claude": {
+          "nocache": 500169,
+          "cache": 41236386
+        },
+        "codex": {
+          "nocache": 0,
+          "cache": 0
+        }
+      }
+    },
+    "2026-06-05": {
+      "macbook": {
+        "claude": {
+          "nocache": 4653195,
+          "cache": 135336684
+        },
+        "codex": {
+          "nocache": 2345644,
+          "cache": 32034348
+        }
+      }
+    },
+    "2026-06-11": {
+      "macbook": {
+        "claude": {
+          "nocache": 607531,
+          "cache": 93783487
+        },
+        "codex": {
+          "nocache": 463169,
+          "cache": 19975105
+        }
+      }
+    },
+    "2026-06-10": {
+      "macbook": {
+        "claude": {
+          "nocache": 1745739,
+          "cache": 175374796
+        },
+        "codex": {
+          "nocache": 208634,
+          "cache": 657018
+        }
+      }
+    },
+    "2026-06-08": {
+      "macbook": {
+        "claude": {
+          "nocache": 53151,
+          "cache": 5808432
+        },
+        "codex": {
+          "nocache": 232527,
+          "cache": 3876687
+        }
+      }
+    },
+    "2026-06-09": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 413615,
+          "cache": 4610351
         }
       }
     }
