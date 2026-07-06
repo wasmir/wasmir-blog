@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""扫描某台机器的 ~/.claude 与 ~/.codex，按「去 cache 的 io」口径
-聚合每日 token，输出 {"YYYY-MM-DD": {"claude": n, "codex": n}} 到 stdout。
-纯 stdlib，兼容 Python 3.9，本地与远端均可直接运行。"""
+"""扫描某台机器的 ~/.claude 与 ~/.codex，按双口径聚合每日 token。
+
+输出 {"YYYY-MM-DD": {"claude": {"nocache": n, "cache": n}, "codex": ...}} 到 stdout。
+纯 stdlib，兼容 Python 3.9，本地与远端均可直接运行。
+"""
 
 import glob
 import json
@@ -41,21 +43,31 @@ def _iter_json_lines(path):
 
 def parse_claude(acc, claude_root, since=None):
     pattern = os.path.join(claude_root, "projects", "**", "*.jsonl")
+    best_by_message = {}
     for path in glob.glob(pattern, recursive=True):
-        for rec in _iter_json_lines(path):
+        for idx, rec in enumerate(_iter_json_lines(path)):
             usage = (rec.get("message") or {}).get("usage")
             if not usage:
                 continue
             date = (rec.get("timestamp") or "")[:10]
+            if since and date < since:
+                continue
             nocache = (usage.get("input_tokens") or 0) + (usage.get("output_tokens") or 0)
             cache = (nocache + (usage.get("cache_creation_input_tokens") or 0)
                      + (usage.get("cache_read_input_tokens") or 0))
-            _add(acc, date, "claude", nocache, cache, since)
+            # Claude streaming 日志会把同一个 message.id 拆成多行；只保留最终/最大 usage。
+            message_id = (rec.get("message") or {}).get("id") or "%s:%d" % (path, idx)
+            existing = best_by_message.get(message_id)
+            if existing is None or (cache, nocache) > existing[0]:
+                best_by_message[message_id] = ((cache, nocache), date, nocache, cache)
+    for _, date, nocache, cache in best_by_message.values():
+        _add(acc, date, "claude", nocache, cache, since)
 
 
 def parse_codex(acc, codex_root, since=None):
     pattern = os.path.join(codex_root, "sessions", "**", "rollout-*.jsonl")
     for path in glob.glob(pattern, recursive=True):
+        seen_snapshots = set()
         for rec in _iter_json_lines(path):
             payload = rec.get("payload") or {}
             if payload.get("type") != "token_count":
@@ -63,13 +75,25 @@ def parse_codex(acc, codex_root, since=None):
             info = payload.get("info")
             if not info:
                 continue
+            total = info.get("total_token_usage") or {}
+            snapshot = (
+                total.get("input_tokens"),
+                total.get("cached_input_tokens"),
+                total.get("output_tokens"),
+                total.get("reasoning_output_tokens"),
+                total.get("total_tokens"),
+            )
+            # 部分历史 session 会重复写入同一个 total_token_usage 快照；重复快照只算一次。
+            if any(v is not None for v in snapshot):
+                if snapshot in seen_snapshots:
+                    continue
+                seen_snapshots.add(snapshot)
             u = info.get("last_token_usage") or {}
             inp = u.get("input_tokens") or 0
             cached = u.get("cached_input_tokens") or 0
             out = u.get("output_tokens") or 0
-            rea = u.get("reasoning_output_tokens") or 0
-            nocache = inp - cached + out + rea  # 减掉缓存命中的输入
-            cache = inp + out + rea             # 含缓存：不减
+            nocache = inp - cached + out  # output_tokens 已包含 reasoning_output_tokens
+            cache = inp + out             # 含缓存：不减
             date = (rec.get("timestamp") or "")[:10]
             _add(acc, date, "codex", nocache, cache, since)
 

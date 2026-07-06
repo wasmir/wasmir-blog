@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastSync": "2026-07-06T10:11:29.642Z",
+    "lastSync": "2026-07-06T10:28:03.436Z",
     "metrics": [
       "nocache",
       "cache"
@@ -15,81 +15,23 @@
     ]
   },
   "byDay": {
-    "2026-05-26": {
-      "macbook": {
-        "claude": {
-          "nocache": 3253241,
-          "cache": 425352357
-        },
-        "codex": {
-          "nocache": 1639019,
-          "cache": 33094635
-        }
-      },
-      "mac-mini": {
-        "claude": {
-          "nocache": 30762,
-          "cache": 574792
-        },
-        "codex": {
-          "nocache": 53639,
-          "cache": 133127
-        }
-      }
-    },
-    "2026-05-27": {
-      "macbook": {
-        "claude": {
-          "nocache": 8749219,
-          "cache": 1063562930
-        },
-        "codex": {
-          "nocache": 1196037,
-          "cache": 8838917
-        }
-      }
-    },
-    "2026-05-28": {
-      "macbook": {
-        "claude": {
-          "nocache": 194058,
-          "cache": 71747440
-        },
-        "codex": {
-          "nocache": 2123011,
-          "cache": 24452611
-        }
-      }
-    },
     "2026-05-29": {
       "macbook": {
         "claude": {
-          "nocache": 5211335,
-          "cache": 453531910
+          "nocache": 830325,
+          "cache": 106136331
         },
         "codex": {
-          "nocache": 765532,
-          "cache": 9453404
+          "nocache": 748788,
+          "cache": 9436660
         }
       }
     },
-    "2026-04-17": {
+    "2026-06-26": {
       "macbook": {
         "claude": {
-          "nocache": 675223,
-          "cache": 45122299
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-05-24": {
-      "macbook": {
-        "claude": {
-          "nocache": 11175496,
-          "cache": 1025193604
+          "nocache": 4747649,
+          "cache": 325277607
         },
         "codex": {
           "nocache": 0,
@@ -97,21 +39,11 @@
         }
       }
     },
-    "2026-05-12": {
+    "2026-06-29": {
       "macbook": {
         "claude": {
-          "nocache": 1912999,
-          "cache": 260476990
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      },
-      "mac-mini": {
-        "claude": {
-          "nocache": 99530,
-          "cache": 12754420
+          "nocache": 2376035,
+          "cache": 332432598
         },
         "codex": {
           "nocache": 0,
@@ -119,11 +51,11 @@
         }
       }
     },
-    "2026-05-06": {
+    "2026-06-12": {
       "macbook": {
         "claude": {
-          "nocache": 2117951,
-          "cache": 697962792
+          "nocache": 192863,
+          "cache": 21269523
         },
         "codex": {
           "nocache": 0,
@@ -131,21 +63,71 @@
         }
       }
     },
-    "2026-05-10": {
+    "2026-06-30": {
       "macbook": {
         "claude": {
-          "nocache": 698145,
-          "cache": 33167913
+          "nocache": 9839587,
+          "cache": 161140878
         },
         "codex": {
           "nocache": 0,
           "cache": 0
         }
-      },
-      "mac-mini": {
+      }
+    },
+    "2026-06-24": {
+      "macbook": {
         "claude": {
-          "nocache": 1330020,
-          "cache": 93459134
+          "nocache": 1423534,
+          "cache": 287504651
+        },
+        "codex": {
+          "nocache": 613756,
+          "cache": 8340220
+        }
+      }
+    },
+    "2026-06-22": {
+      "macbook": {
+        "claude": {
+          "nocache": 422879,
+          "cache": 58834999
+        },
+        "codex": {
+          "nocache": 0,
+          "cache": 0
+        }
+      }
+    },
+    "2026-06-23": {
+      "macbook": {
+        "claude": {
+          "nocache": 3430039,
+          "cache": 240639892
+        },
+        "codex": {
+          "nocache": 0,
+          "cache": 0
+        }
+      }
+    },
+    "2026-07-01": {
+      "macbook": {
+        "claude": {
+          "nocache": 1656623,
+          "cache": 346694601
+        },
+        "codex": {
+          "nocache": 0,
+          "cache": 0
+        }
+      }
+    },
+    "2026-07-02": {
+      "macbook": {
+        "claude": {
+          "nocache": 3408916,
+          "cache": 509478559
         },
         "codex": {
           "nocache": 0,
@@ -156,8 +138,8 @@
     "2026-04-18": {
       "macbook": {
         "claude": {
-          "nocache": 72516,
-          "cache": 5369775
+          "nocache": 28883,
+          "cache": 2846670
         },
         "codex": {
           "nocache": 0,
@@ -165,23 +147,11 @@
         }
       }
     },
-    "2026-05-17": {
+    "2026-06-17": {
       "macbook": {
         "claude": {
-          "nocache": 3958945,
-          "cache": 598090945
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-05-13": {
-      "macbook": {
-        "claude": {
-          "nocache": 4186050,
-          "cache": 591346116
+          "nocache": 1322772,
+          "cache": 73964637
         },
         "codex": {
           "nocache": 0,
@@ -190,8 +160,8 @@
       },
       "mac-mini": {
         "claude": {
-          "nocache": 188460,
-          "cache": 46306392
+          "nocache": 1795,
+          "cache": 114456
         },
         "codex": {
           "nocache": 0,
@@ -199,11 +169,11 @@
         }
       }
     },
-    "2026-05-23": {
+    "2026-06-16": {
       "macbook": {
         "claude": {
-          "nocache": 6766136,
-          "cache": 854111779
+          "nocache": 325557,
+          "cache": 19910948
         },
         "codex": {
           "nocache": 0,
@@ -211,11 +181,11 @@
         }
       }
     },
-    "2026-05-14": {
+    "2026-07-03": {
       "macbook": {
         "claude": {
-          "nocache": 142282,
-          "cache": 4913613
+          "nocache": 20768970,
+          "cache": 661193690
         },
         "codex": {
           "nocache": 0,
@@ -223,33 +193,45 @@
         }
       }
     },
-    "2026-05-15": {
+    "2026-06-04": {
       "macbook": {
         "claude": {
-          "nocache": 36456,
-          "cache": 1484900
+          "nocache": 274738,
+          "cache": 15828444
         },
         "codex": {
-          "nocache": 0,
-          "cache": 0
+          "nocache": 3876957,
+          "cache": 57375837
         }
       }
     },
-    "2026-05-07": {
+    "2026-05-26": {
       "macbook": {
         "claude": {
-          "nocache": 2021808,
-          "cache": 387702128
+          "nocache": 3819,
+          "cache": 90860
         },
         "codex": {
-          "nocache": 0,
-          "cache": 0
+          "nocache": 1590397,
+          "cache": 33046013
         }
       },
       "mac-mini": {
         "claude": {
-          "nocache": 1135641,
-          "cache": 111958814
+          "nocache": 9017,
+          "cache": 137584
+        },
+        "codex": {
+          "nocache": 52448,
+          "cache": 131936
+        }
+      }
+    },
+    "2026-06-11": {
+      "macbook": {
+        "claude": {
+          "nocache": 249982,
+          "cache": 51282694
         },
         "codex": {
           "nocache": 0,
@@ -257,11 +239,11 @@
         }
       }
     },
-    "2026-04-26": {
+    "2026-06-15": {
       "macbook": {
         "claude": {
-          "nocache": 2045788,
-          "cache": 471816710
+          "nocache": 894964,
+          "cache": 35114156
         },
         "codex": {
           "nocache": 0,
@@ -269,11 +251,35 @@
         }
       }
     },
-    "2026-04-27": {
+    "2026-06-10": {
       "macbook": {
         "claude": {
-          "nocache": 1215151,
-          "cache": 445703491
+          "nocache": 875231,
+          "cache": 68630335
+        },
+        "codex": {
+          "nocache": 207753,
+          "cache": 656137
+        }
+      }
+    },
+    "2026-07-06": {
+      "macbook": {
+        "claude": {
+          "nocache": 132049,
+          "cache": 6570575
+        },
+        "codex": {
+          "nocache": 7015045,
+          "cache": 111379845
+        }
+      }
+    },
+    "2026-07-04": {
+      "macbook": {
+        "claude": {
+          "nocache": 3185142,
+          "cache": 91596260
         },
         "codex": {
           "nocache": 0,
@@ -281,21 +287,11 @@
         }
       }
     },
-    "2026-04-28": {
+    "2026-06-18": {
       "macbook": {
         "claude": {
-          "nocache": 10464,
-          "cache": 1197742
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      },
-      "mac-mini": {
-        "claude": {
-          "nocache": 789864,
-          "cache": 111187710
+          "nocache": 917413,
+          "cache": 87223860
         },
         "codex": {
           "nocache": 0,
@@ -303,11 +299,11 @@
         }
       }
     },
-    "2026-05-18": {
+    "2026-06-27": {
       "macbook": {
         "claude": {
-          "nocache": 7140216,
-          "cache": 1199024126
+          "nocache": 2800733,
+          "cache": 114791663
         },
         "codex": {
           "nocache": 0,
@@ -315,11 +311,11 @@
         }
       }
     },
-    "2026-05-19": {
+    "2026-07-05": {
       "macbook": {
         "claude": {
-          "nocache": 8528795,
-          "cache": 1685294595
+          "nocache": 170621,
+          "cache": 12428405
         },
         "codex": {
           "nocache": 0,
@@ -327,21 +323,11 @@
         }
       }
     },
-    "2026-05-08": {
+    "2026-06-19": {
       "macbook": {
         "claude": {
-          "nocache": 236793,
-          "cache": 167910207
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      },
-      "mac-mini": {
-        "claude": {
-          "nocache": 2216722,
-          "cache": 229824545
+          "nocache": 695030,
+          "cache": 82945352
         },
         "codex": {
           "nocache": 0,
@@ -349,21 +335,23 @@
         }
       }
     },
-    "2026-05-05": {
+    "2026-06-25": {
       "macbook": {
         "claude": {
-          "nocache": 26837,
-          "cache": 1649747
+          "nocache": 921262,
+          "cache": 134514191
         },
         "codex": {
-          "nocache": 0,
-          "cache": 0
+          "nocache": 129282,
+          "cache": 723586
         }
-      },
-      "mac-mini": {
+      }
+    },
+    "2026-06-20": {
+      "macbook": {
         "claude": {
-          "nocache": 14126,
-          "cache": 12082551
+          "nocache": 222589,
+          "cache": 13068615
         },
         "codex": {
           "nocache": 0,
@@ -371,21 +359,11 @@
         }
       }
     },
-    "2026-05-09": {
+    "2026-06-28": {
       "macbook": {
         "claude": {
-          "nocache": 49555,
-          "cache": 45613664
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      },
-      "mac-mini": {
-        "claude": {
-          "nocache": 909575,
-          "cache": 56182957
+          "nocache": 365895,
+          "cache": 49953986
         },
         "codex": {
           "nocache": 0,
@@ -393,11 +371,11 @@
         }
       }
     },
-    "2026-05-20": {
+    "2026-06-13": {
       "macbook": {
         "claude": {
-          "nocache": 6235359,
-          "cache": 879747238
+          "nocache": 101556,
+          "cache": 9050779
         },
         "codex": {
           "nocache": 0,
@@ -405,11 +383,11 @@
         }
       }
     },
-    "2026-05-21": {
+    "2026-06-14": {
       "macbook": {
         "claude": {
-          "nocache": 2928070,
-          "cache": 293736526
+          "nocache": 118330,
+          "cache": 8155433
         },
         "codex": {
           "nocache": 0,
@@ -417,35 +395,47 @@
         }
       }
     },
-    "2026-05-25": {
+    "2026-06-21": {
       "macbook": {
         "claude": {
-          "nocache": 3563307,
-          "cache": 449685788
-        },
-        "codex": {
-          "nocache": 1521258,
-          "cache": 32058218
-        }
-      }
-    },
-    "2026-05-22": {
-      "macbook": {
-        "claude": {
-          "nocache": 1619287,
-          "cache": 77683822
+          "nocache": 46832,
+          "cache": 2400771
         },
         "codex": {
           "nocache": 0,
           "cache": 0
+        }
+      }
+    },
+    "2026-06-05": {
+      "macbook": {
+        "claude": {
+          "nocache": 1382280,
+          "cache": 23285163
+        },
+        "codex": {
+          "nocache": 2050760,
+          "cache": 31497672
+        }
+      }
+    },
+    "2026-06-08": {
+      "macbook": {
+        "claude": {
+          "nocache": 22078,
+          "cache": 2931362
+        },
+        "codex": {
+          "nocache": 220150,
+          "cache": 3761526
         }
       }
     },
     "2026-04-16": {
       "macbook": {
         "claude": {
-          "nocache": 7114,
-          "cache": 1182913
+          "nocache": 6915,
+          "cache": 620428
         },
         "codex": {
           "nocache": 0,
@@ -460,8 +450,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 589486,
-          "cache": 3394734
+          "nocache": 268040,
+          "cache": 1687048
         }
       }
     },
@@ -472,8 +462,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 2918821,
-          "cache": 152076837
+          "nocache": 1394339,
+          "cache": 75998243
         }
       },
       "mac-mini": {
@@ -482,8 +472,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 491285,
-          "cache": 4823701
+          "nocache": 219063,
+          "cache": 2399159
         }
       }
     },
@@ -494,8 +484,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 982174,
-          "cache": 11363742
+          "nocache": 439619,
+          "cache": 5632451
         }
       }
     },
@@ -506,8 +496,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 608566,
-          "cache": 8446646
+          "nocache": 277553,
+          "cache": 4233393
         }
       },
       "mac-mini": {
@@ -516,8 +506,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 383064,
-          "cache": 3817304
+          "nocache": 186259,
+          "cache": 1914771
         }
       }
     },
@@ -528,8 +518,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 94125,
-          "cache": 427949
+          "nocache": 39452,
+          "cache": 214556
         }
       }
     },
@@ -540,8 +530,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 912578,
-          "cache": 16732482
+          "nocache": 425893,
+          "cache": 8370725
         }
       },
       "mac-mini": {
@@ -550,8 +540,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 656458,
-          "cache": 16582730
+          "nocache": 296113,
+          "cache": 8270513
         }
       }
     },
@@ -574,8 +564,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 4372553,
-          "cache": 48931145
+          "nocache": 3451111,
+          "cache": 42508519
         }
       }
     },
@@ -586,8 +576,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 7127197,
-          "cache": 147596445
+          "nocache": 5994631,
+          "cache": 126325127
         }
       }
     },
@@ -598,16 +588,124 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 4035485,
-          "cache": 43774237
+          "nocache": 2400768,
+          "cache": 33053824
         }
       }
     },
-    "2026-04-30": {
+    "2026-05-27": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 1152846,
+          "cache": 8742094
+        }
+      }
+    },
+    "2026-05-28": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 2065279,
+          "cache": 24180607
+        }
+      }
+    },
+    "2026-05-30": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 377036,
+          "cache": 2502220
+        }
+      }
+    },
+    "2026-05-25": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 1486836,
+          "cache": 31832436
+        }
+      }
+    },
+    "2026-06-03": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 2322193,
+          "cache": 20657297
+        }
+      }
+    },
+    "2026-06-09": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 410407,
+          "cache": 4607143
+        }
+      }
+    },
+    "2026-06-02": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 306679,
+          "cache": 4507127
+        }
+      }
+    },
+    "2026-06-01": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 2507150,
+          "cache": 31993358
+        }
+      }
+    },
+    "2026-05-31": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 1714018,
+          "cache": 14091106
+        }
+      }
+    },
+    "2026-05-09": {
       "mac-mini": {
         "claude": {
-          "nocache": 74216,
-          "cache": 21869131
+          "nocache": 24322,
+          "cache": 852401
         },
         "codex": {
           "nocache": 0,
@@ -615,59 +713,11 @@
         }
       }
     },
-    "2026-04-29": {
+    "2026-04-28": {
       "mac-mini": {
         "claude": {
-          "nocache": 105150,
-          "cache": 38549429
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-05-01": {
-      "mac-mini": {
-        "claude": {
-          "nocache": 49940,
-          "cache": 43490683
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-05-02": {
-      "mac-mini": {
-        "claude": {
-          "nocache": 159247,
-          "cache": 53576619
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-05-04": {
-      "mac-mini": {
-        "claude": {
-          "nocache": 99667,
-          "cache": 66864253
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-05-11": {
-      "mac-mini": {
-        "claude": {
-          "nocache": 614593,
-          "cache": 21238248
+          "nocache": 33543,
+          "cache": 1360126
         },
         "codex": {
           "nocache": 0,
@@ -682,8 +732,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 552396,
-          "cache": 3688268
+          "nocache": 236424,
+          "cache": 1845768
         }
       }
     },
@@ -694,8 +744,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 4394488,
-          "cache": 115972344
+          "nocache": 1946580,
+          "cache": 57583444
         }
       }
     },
@@ -706,8 +756,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 4426946,
-          "cache": 141836226
+          "nocache": 2001178,
+          "cache": 70655130
         }
       }
     },
@@ -718,8 +768,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 449868,
-          "cache": 3940172
+          "nocache": 202726,
+          "cache": 1970150
         }
       }
     },
@@ -730,8 +780,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 572712,
-          "cache": 12959272
+          "nocache": 248296,
+          "cache": 6478184
         }
       }
     },
@@ -742,8 +792,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 119063,
-          "cache": 426647
+          "nocache": 57377,
+          "cache": 215713
         }
       }
     },
@@ -754,8 +804,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 820078,
-          "cache": 14973934
+          "nocache": 375347,
+          "cache": 7465267
         }
       }
     },
@@ -766,8 +816,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 29753,
-          "cache": 64313
+          "nocache": 13688,
+          "cache": 35576
         }
       }
     },
@@ -778,8 +828,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 1378463,
-          "cache": 27180319
+          "nocache": 652176,
+          "cache": 13590928
         }
       }
     },
@@ -790,8 +840,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 447328,
-          "cache": 3138912
+          "nocache": 194206,
+          "cache": 1567262
         }
       }
     },
@@ -802,8 +852,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 1279042,
-          "cache": 27458498
+          "nocache": 584789,
+          "cache": 13742037
         }
       }
     },
@@ -814,8 +864,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 4574197,
-          "cache": 91955061
+          "nocache": 2145168,
+          "cache": 45984272
         }
       }
     },
@@ -826,8 +876,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 1774671,
-          "cache": 27486159
+          "nocache": 836124,
+          "cache": 13756444
         }
       }
     },
@@ -838,8 +888,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 6605379,
-          "cache": 100478275
+          "nocache": 2886361,
+          "cache": 50013785
         }
       }
     },
@@ -850,8 +900,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 2446572,
-          "cache": 53412332
+          "nocache": 1151065,
+          "cache": 26676057
         }
       }
     },
@@ -862,8 +912,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 1351314,
-          "cache": 11464466
+          "nocache": 610908,
+          "cache": 5708380
         }
       }
     },
@@ -874,8 +924,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 3653601,
-          "cache": 40394465
+          "nocache": 1498566,
+          "cache": 20002758
         }
       }
     },
@@ -886,8 +936,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 29908,
-          "cache": 109012
+          "nocache": 14266,
+          "cache": 60218
         }
       }
     },
@@ -898,8 +948,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 1951778,
-          "cache": 31531298
+          "nocache": 918091,
+          "cache": 15774539
         }
       }
     },
@@ -910,8 +960,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 450628,
-          "cache": 4398148
+          "nocache": 208772,
+          "cache": 2201860
         }
       }
     },
@@ -922,8 +972,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 628849,
-          "cache": 6156785
+          "nocache": 259842,
+          "cache": 3052034
         }
       }
     },
@@ -934,8 +984,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 1850027,
-          "cache": 48101931
+          "nocache": 815622,
+          "cache": 23946630
         }
       }
     },
@@ -946,8 +996,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 180990,
-          "cache": 1474686
+          "nocache": 72813,
+          "cache": 746221
         }
       }
     },
@@ -958,8 +1008,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 156202,
-          "cache": 2247722
+          "nocache": 68281,
+          "cache": 1112889
         }
       }
     },
@@ -970,8 +1020,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 2510532,
-          "cache": 32310852
+          "nocache": 1191413,
+          "cache": 15979893
         }
       }
     },
@@ -982,8 +1032,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 485031,
-          "cache": 5078823
+          "nocache": 222216,
+          "cache": 2543624
         }
       }
     },
@@ -994,8 +1044,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 1068705,
-          "cache": 16757665
+          "nocache": 487795,
+          "cache": 8376307
         }
       }
     },
@@ -1006,8 +1056,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 414308,
-          "cache": 3053668
+          "nocache": 192526,
+          "cache": 1547022
         }
       }
     },
@@ -1018,8 +1068,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 775431,
-          "cache": 5569159
+          "nocache": 342019,
+          "cache": 2769667
         }
       }
     },
@@ -1030,8 +1080,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 198262,
-          "cache": 708854
+          "nocache": 91210,
+          "cache": 359626
         }
       }
     },
@@ -1042,8 +1092,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 1624628,
-          "cache": 15221044
+          "nocache": 687469,
+          "cache": 7547629
         }
       }
     },
@@ -1054,8 +1104,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 182502,
-          "cache": 894054
+          "nocache": 92399,
+          "cache": 450415
         }
       }
     },
@@ -1066,8 +1116,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 1098983,
-          "cache": 11559399
+          "nocache": 479409,
+          "cache": 5715761
         }
       }
     },
@@ -1078,8 +1128,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 184534,
-          "cache": 2629846
+          "nocache": 144982,
+          "cache": 2590294
         }
       }
     },
@@ -1090,8 +1140,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 78386,
-          "cache": 366386
+          "nocache": 68146,
+          "cache": 356146
         }
       }
     },
@@ -1102,8 +1152,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 217834,
-          "cache": 1796202
+          "nocache": 188778,
+          "cache": 1767146
         }
       }
     },
@@ -1114,8 +1164,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 437958,
-          "cache": 2287430
+          "nocache": 377414,
+          "cache": 2226886
         }
       }
     },
@@ -1126,8 +1176,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 27332,
-          "cache": 109764
+          "nocache": 25860,
+          "cache": 108292
         }
       }
     },
@@ -1138,8 +1188,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 76686,
-          "cache": 590606
+          "nocache": 70542,
+          "cache": 584462
         }
       }
     },
@@ -1150,8 +1200,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 147070,
-          "cache": 1891710
+          "nocache": 132478,
+          "cache": 1877118
         }
       }
     },
@@ -1162,8 +1212,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 52577,
-          "cache": 537825
+          "nocache": 44129,
+          "cache": 529377
         }
       }
     },
@@ -1174,8 +1224,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 75980,
-          "cache": 408268
+          "nocache": 70604,
+          "cache": 402892
         }
       }
     },
@@ -1186,8 +1236,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 230934,
-          "cache": 2195222
+          "nocache": 199510,
+          "cache": 2163798
         }
       }
     },
@@ -1198,8 +1248,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 48755,
-          "cache": 195059
+          "nocache": 41011,
+          "cache": 187315
         }
       }
     },
@@ -1210,8 +1260,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 53221,
-          "cache": 183781
+          "nocache": 25001,
+          "cache": 97449
         }
       }
     },
@@ -1222,8 +1272,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 844361,
-          "cache": 6556105
+          "nocache": 370457,
+          "cache": 3247513
         }
       }
     },
@@ -1234,440 +1284,8 @@
           "cache": 0
         },
         "codex": {
-          "nocache": 208663,
-          "cache": 844311
-        }
-      }
-    },
-    "2026-05-30": {
-      "macbook": {
-        "claude": {
-          "nocache": 1674889,
-          "cache": 129334948
-        },
-        "codex": {
-          "nocache": 383543,
-          "cache": 2508727
-        }
-      }
-    },
-    "2026-05-31": {
-      "macbook": {
-        "claude": {
-          "nocache": 5262887,
-          "cache": 390354361
-        },
-        "codex": {
-          "nocache": 1739388,
-          "cache": 14116476
-        }
-      }
-    },
-    "2026-06-01": {
-      "macbook": {
-        "claude": {
-          "nocache": 3275234,
-          "cache": 244317408
-        },
-        "codex": {
-          "nocache": 2558104,
-          "cache": 32044312
-        }
-      }
-    },
-    "2026-06-04": {
-      "macbook": {
-        "claude": {
-          "nocache": 897247,
-          "cache": 41832433
-        },
-        "codex": {
-          "nocache": 3989528,
-          "cache": 57553816
-        }
-      }
-    },
-    "2026-06-02": {
-      "macbook": {
-        "claude": {
-          "nocache": 2364962,
-          "cache": 164019590
-        },
-        "codex": {
-          "nocache": 313747,
-          "cache": 4514195
-        }
-      }
-    },
-    "2026-06-03": {
-      "macbook": {
-        "claude": {
-          "nocache": 1024576,
-          "cache": 54375220
-        },
-        "codex": {
-          "nocache": 2396310,
-          "cache": 20983062
-        }
-      }
-    },
-    "2026-06-12": {
-      "macbook": {
-        "claude": {
-          "nocache": 507706,
-          "cache": 41563585
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-05": {
-      "macbook": {
-        "claude": {
-          "nocache": 4653195,
-          "cache": 135336684
-        },
-        "codex": {
-          "nocache": 2345644,
-          "cache": 32034348
-        }
-      }
-    },
-    "2026-06-11": {
-      "macbook": {
-        "claude": {
-          "nocache": 607531,
-          "cache": 93783487
-        },
-        "codex": {
-          "nocache": 463169,
-          "cache": 19975105
-        }
-      }
-    },
-    "2026-06-10": {
-      "macbook": {
-        "claude": {
-          "nocache": 1745739,
-          "cache": 175374796
-        },
-        "codex": {
-          "nocache": 208634,
-          "cache": 657018
-        }
-      }
-    },
-    "2026-06-08": {
-      "macbook": {
-        "claude": {
-          "nocache": 53151,
-          "cache": 5808432
-        },
-        "codex": {
-          "nocache": 232527,
-          "cache": 3876687
-        }
-      }
-    },
-    "2026-06-09": {
-      "macbook": {
-        "claude": {
-          "nocache": 0,
-          "cache": 0
-        },
-        "codex": {
-          "nocache": 413615,
-          "cache": 4610351
-        }
-      }
-    },
-    "2026-06-24": {
-      "macbook": {
-        "claude": {
-          "nocache": 3657834,
-          "cache": 671086910
-        },
-        "codex": {
-          "nocache": 641384,
-          "cache": 8433256
-        }
-      }
-    },
-    "2026-06-22": {
-      "macbook": {
-        "claude": {
-          "nocache": 1258019,
-          "cache": 149290974
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-23": {
-      "macbook": {
-        "claude": {
-          "nocache": 7658108,
-          "cache": 586834250
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-17": {
-      "macbook": {
-        "claude": {
-          "nocache": 3725975,
-          "cache": 167646222
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-16": {
-      "macbook": {
-        "claude": {
-          "nocache": 864033,
-          "cache": 45928872
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-15": {
-      "macbook": {
-        "claude": {
-          "nocache": 2406510,
-          "cache": 99818265
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-18": {
-      "macbook": {
-        "claude": {
-          "nocache": 2682658,
-          "cache": 263130831
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-19": {
-      "macbook": {
-        "claude": {
-          "nocache": 2159177,
-          "cache": 217534416
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-20": {
-      "macbook": {
-        "claude": {
-          "nocache": 547486,
-          "cache": 33404334
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-13": {
-      "macbook": {
-        "claude": {
-          "nocache": 295723,
-          "cache": 20600879
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-14": {
-      "macbook": {
-        "claude": {
-          "nocache": 349400,
-          "cache": 19792724
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-21": {
-      "macbook": {
-        "claude": {
-          "nocache": 146747,
-          "cache": 5840204
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-26": {
-      "macbook": {
-        "claude": {
-          "nocache": 11016724,
-          "cache": 740584868
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-25": {
-      "macbook": {
-        "claude": {
-          "nocache": 3438272,
-          "cache": 473873065
-        },
-        "codex": {
-          "nocache": 135803,
-          "cache": 730107
-        }
-      }
-    },
-    "2026-06-29": {
-      "macbook": {
-        "claude": {
-          "nocache": 6203440,
-          "cache": 804768071
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-27": {
-      "macbook": {
-        "claude": {
-          "nocache": 6991261,
-          "cache": 311723789
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-28": {
-      "macbook": {
-        "claude": {
-          "nocache": 1177455,
-          "cache": 132247160
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-06-30": {
-      "macbook": {
-        "claude": {
-          "nocache": 19739603,
-          "cache": 356271859
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-07-01": {
-      "macbook": {
-        "claude": {
-          "nocache": 4810054,
-          "cache": 821246957
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-07-02": {
-      "macbook": {
-        "claude": {
-          "nocache": 9638281,
-          "cache": 1382254626
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-07-03": {
-      "macbook": {
-        "claude": {
-          "nocache": 58169792,
-          "cache": 1662262489
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-07-06": {
-      "macbook": {
-        "claude": {
-          "nocache": 491026,
-          "cache": 15510786
-        },
-        "codex": {
-          "nocache": 6772082,
-          "cache": 103418610
-        }
-      }
-    },
-    "2026-07-04": {
-      "macbook": {
-        "claude": {
-          "nocache": 8570419,
-          "cache": 294460168
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
-        }
-      }
-    },
-    "2026-07-05": {
-      "macbook": {
-        "claude": {
-          "nocache": 510239,
-          "cache": 31963035
-        },
-        "codex": {
-          "nocache": 0,
-          "cache": 0
+          "nocache": 89327,
+          "cache": 424943
         }
       }
     }

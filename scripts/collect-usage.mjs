@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { mergeUsage } from './merge.mjs';
 import { computeSince } from './since.mjs';
+import { mergeBaseForScan } from './collect-base.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = join(__dirname, '..');
@@ -53,6 +54,6 @@ for (const r of machines.remotes || []) {
   }
 }
 
-const merged = mergeUsage(existing, perMachine, new Date().toISOString());
+const merged = mergeUsage(mergeBaseForScan(existing, since), perMachine, new Date().toISOString());
 writeFileSync(usagePath, JSON.stringify(merged, null, 2) + '\n');
 console.log(`[done] 写入 ${usagePath}，共 ${Object.keys(merged.byDay).length} 天`);

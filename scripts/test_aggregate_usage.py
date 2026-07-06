@@ -40,6 +40,28 @@ class AggregateTest(unittest.TestCase):
             self.assertEqual(acc["2026-05-01"]["claude"], {"nocache": 200, "cache": 1700})
             self.assertEqual(acc["2026-05-01"]["codex"], {"nocache": 0, "cache": 0})
 
+    def test_claude_keeps_largest_usage_per_message_id(self):
+        with tempfile.TemporaryDirectory() as root:
+            claude = os.path.join(root, ".claude")
+            codex = os.path.join(root, ".codex")
+            _write(os.path.join(claude, "projects", "p", "a.jsonl"), [
+                {"timestamp": "2026-05-01T10:00:00Z",
+                 "message": {"id": "msg_1", "usage": {"input_tokens": 100, "output_tokens": 1,
+                                                       "cache_read_input_tokens": 50}}},
+                {"timestamp": "2026-05-01T10:00:01Z",
+                 "message": {"id": "msg_1", "usage": {"input_tokens": 100, "output_tokens": 40,
+                                                       "cache_read_input_tokens": 50}}},
+                {"timestamp": "2026-05-01T10:00:02Z",
+                 "message": {"id": "msg_1", "usage": {"input_tokens": 100, "output_tokens": 40,
+                                                       "cache_read_input_tokens": 50}}},
+                {"timestamp": "2026-05-01T10:01:00Z",
+                 "message": {"id": "msg_2", "usage": {"input_tokens": 10, "output_tokens": 5}}},
+            ])
+            os.makedirs(codex)
+            acc = agg.aggregate(claude, codex)
+            # msg_1 只保留最终/最大 usage：nocache=140, cache=190；msg_2 再加 15。
+            self.assertEqual(acc["2026-05-01"]["claude"], {"nocache": 155, "cache": 205})
+
     def test_codex_dual_metric(self):
         with tempfile.TemporaryDirectory() as root:
             claude = os.path.join(root, ".claude")
@@ -57,9 +79,50 @@ class AggregateTest(unittest.TestCase):
                  "payload": {"type": "agent_message"}},  # 非 token_count，跳过
             ])
             acc = agg.aggregate(claude, codex)
-            # nocache = (1000-600)+200+50 = 650；cache = 1000+200+50 = 1250
-            self.assertEqual(acc["2026-05-02"]["codex"], {"nocache": 650, "cache": 1250})
+            # reasoning_output_tokens 是 output_tokens 的明细，不额外叠加。
+            # nocache = (1000-600)+200 = 600；cache = 1000+200 = 1200
+            self.assertEqual(acc["2026-05-02"]["codex"], {"nocache": 600, "cache": 1200})
             self.assertEqual(acc["2026-05-02"]["claude"], {"nocache": 0, "cache": 0})
+
+    def test_codex_skips_duplicate_total_token_snapshots(self):
+        with tempfile.TemporaryDirectory() as root:
+            claude = os.path.join(root, ".claude")
+            codex = os.path.join(root, ".codex")
+            os.makedirs(claude)
+            _write(os.path.join(codex, "sessions", "s", "rollout-1.jsonl"), [
+                {"timestamp": "2026-05-02T09:00:00Z",
+                 "payload": {"type": "token_count", "info": {
+                     "last_token_usage": {
+                         "input_tokens": 100, "cached_input_tokens": 60,
+                         "output_tokens": 20, "reasoning_output_tokens": 5,
+                         "total_tokens": 120},
+                     "total_token_usage": {
+                         "input_tokens": 100, "cached_input_tokens": 60,
+                         "output_tokens": 20, "reasoning_output_tokens": 5,
+                         "total_tokens": 120}}}},
+                {"timestamp": "2026-05-02T09:00:01Z",
+                 "payload": {"type": "token_count", "info": {
+                     "last_token_usage": {
+                         "input_tokens": 100, "cached_input_tokens": 60,
+                         "output_tokens": 20, "reasoning_output_tokens": 5,
+                         "total_tokens": 120},
+                     "total_token_usage": {
+                         "input_tokens": 100, "cached_input_tokens": 60,
+                         "output_tokens": 20, "reasoning_output_tokens": 5,
+                         "total_tokens": 120}}}},
+                {"timestamp": "2026-05-02T09:01:00Z",
+                 "payload": {"type": "token_count", "info": {
+                     "last_token_usage": {
+                         "input_tokens": 50, "cached_input_tokens": 10,
+                         "output_tokens": 30, "reasoning_output_tokens": 7,
+                         "total_tokens": 80},
+                     "total_token_usage": {
+                         "input_tokens": 150, "cached_input_tokens": 70,
+                         "output_tokens": 50, "reasoning_output_tokens": 12,
+                         "total_tokens": 200}}}},
+            ])
+            acc = agg.aggregate(claude, codex)
+            self.assertEqual(acc["2026-05-02"]["codex"], {"nocache": 130, "cache": 200})
 
     def test_cache_never_below_nocache(self):
         with tempfile.TemporaryDirectory() as root:
