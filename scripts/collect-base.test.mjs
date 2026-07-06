@@ -13,10 +13,7 @@ describe('mergeBaseForScan', () => {
     expect(mergeBaseForScan(existing, '2026-05-26')).toBe(existing);
   });
 
-  it('全量扫描清空 byDay，避免旧口径历史残留', () => {
-    expect(mergeBaseForScan(existing, null)).toEqual({
-      meta: { machines: ['macbook', 'mac-mini'] },
-      byDay: {},
-    });
+  it('全量扫描仍保留既有 byDay，避免原始日志轮转后丢历史', () => {
+    expect(mergeBaseForScan(existing, null)).toBe(existing);
   });
 });

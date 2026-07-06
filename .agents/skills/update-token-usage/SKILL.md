@@ -20,7 +20,8 @@ description: 当需要更新 / 刷新 wasmir 首页「Token activity」热力图
 - 补全「最后同步那天没跑完」的残缺（lastSync 多发生在当天午间）；
 - 3 天缓冲兜住「某台机器跨天离线、几天后才恢复」的漏数据；
 - 旧天由 `merge.mjs` 原样保留，不会丢历史。
-首次 / 无 lastSync 时 `since=null`，自动降级全量。
+首次 / 无 lastSync 时 `since=null`，自动降级全量扫描；`collect-usage.mjs` 仍以现有
+`usage.json` 为合并基底，只覆盖本次扫到的日期，避免老日志轮转后把持久历史删掉。
 
 > ⚠️ 缓冲只有 **3 天**：若某台机器离线**超过 3 天**才恢复，超出窗口的那几天会被**永久漏掉**、
 > 不会自动补回。需要补时手动触发更大范围/全量（见下方「常见问题 · 想全量重算」）。
@@ -85,5 +86,5 @@ description: 当需要更新 / 刷新 wasmir 首页「Token activity」热力图
 |---|---|
 | `[warn] 远端 … 不可达，降级跳过` | 正常降级。该机历史保留，本次只更新可达机器，继续提交即可。 |
 | `git diff` 无改动 | 上次同步后无新 token。报告「无新增」，**不要**空提交。 |
-| 想全量重算（如改了口径） | 把 `usage.json` 的 `meta.lastSync` 清空/删掉再 `npm run collect`（since=null → 全量并写回）。注：裸跑 `python3 scripts/aggregate-usage.py` 只把单机聚合 dump 到 stdout，不写文件、不合多机，仅供调试查看。 |
+| 想全量重算（如改了口径） | 把 `usage.json` 的 `meta.lastSync` 清空/删掉再 `npm run collect`（since=null → 全量扫描并写回）。注意：全量扫描仍保留现有 `byDay` 里扫不到的历史天，只覆盖扫到的日期；裸跑 `python3 scripts/aggregate-usage.py` 只把单机聚合 dump 到 stdout，不写文件、不合多机。 |
 | 改了聚合/合并逻辑 | 先跑测试：`npm test` + `npm run test:py`，全绿再 collect。 |
