@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastSync": "2026-07-06T10:28:03.436Z",
+    "lastSync": "2026-07-17T07:58:33.200Z",
     "metrics": [
       "nocache",
       "cache"
@@ -270,8 +270,8 @@
           "cache": 6570575
         },
         "codex": {
-          "nocache": 7015045,
-          "cache": 111379845
+          "nocache": 13007344,
+          "cache": 182292720
         }
       }
     },
@@ -1658,6 +1658,208 @@
         "codex": {
           "nocache": 0,
           "cache": 0
+        }
+      }
+    },
+    "2026-07-12": {
+      "macbook": {
+        "claude": {
+          "nocache": 132402,
+          "cache": 9365156
+        },
+        "codex": {
+          "nocache": 0,
+          "cache": 0
+        }
+      },
+      "mac-mini": {
+        "claude": {
+          "nocache": 163894,
+          "cache": 10222111
+        },
+        "codex": {
+          "nocache": 1914706,
+          "cache": 96143698
+        }
+      }
+    },
+    "2026-07-10": {
+      "macbook": {
+        "claude": {
+          "nocache": 353175,
+          "cache": 38820631
+        },
+        "codex": {
+          "nocache": 7238146,
+          "cache": 111867906
+        }
+      },
+      "mac-mini": {
+        "claude": {
+          "nocache": 75603,
+          "cache": 3414688
+        },
+        "codex": {
+          "nocache": 11007706,
+          "cache": 508608474
+        }
+      }
+    },
+    "2026-07-09": {
+      "macbook": {
+        "claude": {
+          "nocache": 75392,
+          "cache": 1956227
+        },
+        "codex": {
+          "nocache": 1665992,
+          "cache": 18669000
+        }
+      },
+      "mac-mini": {
+        "claude": {
+          "nocache": 1497104,
+          "cache": 24852589
+        },
+        "codex": {
+          "nocache": 4998831,
+          "cache": 78574255
+        }
+      }
+    },
+    "2026-07-13": {
+      "macbook": {
+        "claude": {
+          "nocache": 69974,
+          "cache": 2468230
+        },
+        "codex": {
+          "nocache": 1097879,
+          "cache": 21858455
+        }
+      },
+      "mac-mini": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 7927166,
+          "cache": 239989374
+        }
+      }
+    },
+    "2026-07-17": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 487099,
+          "cache": 10143931
+        }
+      },
+      "mac-mini": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 10747057,
+          "cache": 201531825
+        }
+      }
+    },
+    "2026-07-07": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 3744862,
+          "cache": 79127134
+        }
+      }
+    },
+    "2026-07-08": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 3170649,
+          "cache": 54121177
+        }
+      },
+      "mac-mini": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 638629,
+          "cache": 3739173
+        }
+      }
+    },
+    "2026-07-14": {
+      "macbook": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 325515,
+          "cache": 7265675
+        }
+      },
+      "mac-mini": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 17369892,
+          "cache": 423019556
+        }
+      }
+    },
+    "2026-07-16": {
+      "mac-mini": {
+        "claude": {
+          "nocache": 25032,
+          "cache": 1564114
+        },
+        "codex": {
+          "nocache": 21194007,
+          "cache": 432819735
+        }
+      }
+    },
+    "2026-07-11": {
+      "mac-mini": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 6229437,
+          "cache": 342288573
+        }
+      }
+    },
+    "2026-07-15": {
+      "mac-mini": {
+        "claude": {
+          "nocache": 0,
+          "cache": 0
+        },
+        "codex": {
+          "nocache": 57942488,
+          "cache": 2674259928
         }
       }
     }
